@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lernplan Sommer 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0f0f11;--sf:#18181c;--sf2:#222228;--bd:#2e2e38;--tx:#f0f0f2;--mu:#8888a0;--fa:#444458;--r:12px;--rs:8px;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--tx);font-family:'DM Sans',sans-serif;font-size:15px;line-height:1.6;}
+.wrap{max-width:920px;margin:0 auto;padding:2rem 1.5rem 4rem;}
+.lbl{font-size:11px;font-weight:500;color:var(--fa);letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px;}
+.card{background:var(--sf);border:.5px solid var(--bd);border-radius:var(--r);padding:1.25rem 1.5rem;margin-bottom:1.5rem;}
+/* OVERALL */
+.ov-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;}
+.ov-ti{font-size:13px;color:var(--mu);}
+.ov-pct{font-size:22px;font-weight:500;}
+.bw{height:6px;background:var(--bd);border-radius:3px;margin-bottom:10px;}
+.bb{height:6px;border-radius:3px;background:linear-gradient(90deg,#5588ff,#9370DB);transition:width .4s;}
+.fbars{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;}
+.fb{display:flex;flex-direction:column;gap:3px;}
+.fbn{font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.fbbw{height:3px;background:var(--bd);border-radius:2px;}
+.fbb{height:3px;border-radius:2px;transition:width .3s;}
+/* TODAY */
+.tnav{display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+.tnav button{background:var(--sf2);border:.5px solid var(--bd);color:var(--tx);border-radius:var(--rs);padding:4px 12px;cursor:pointer;font-size:13px;font-family:'DM Sans',sans-serif;}
+.tnav button:hover{background:var(--bd);}
+.tdate{font-size:18px;font-weight:500;flex:1;}
+.tfree{font-size:14px;color:var(--mu);padding:4px 0;}
+.bi{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:.5px solid var(--bd);cursor:pointer;user-select:none;}
+.bi:last-child{border-bottom:none;}
+.bi:hover{opacity:.85;}
+.bck{width:20px;height:20px;border-radius:50%;border:1.5px solid var(--fa);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s;}
+.bck.done{border-color:transparent;}
+.btime{font-size:11px;color:var(--mu);font-family:'DM Mono',monospace;flex-shrink:0;width:90px;}
+.bname{font-size:14px;font-weight:500;}
+.bname.done{color:var(--mu);text-decoration:line-through;}
+.bdet{font-size:12px;color:var(--mu);}
+.btag{margin-left:auto;font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px;flex-shrink:0;}
+/* CALENDAR */
+.cnav{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
+.cnav button{background:var(--sf2);border:.5px solid var(--bd);color:var(--tx);border-radius:var(--rs);padding:4px 12px;cursor:pointer;font-size:13px;font-family:'DM Sans',sans-serif;}
+.cnav button:hover{background:var(--bd);}
+.cmo{font-size:15px;font-weight:500;}
+.cgr{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;}
+.cdow{text-align:center;font-size:10px;color:var(--fa);padding:3px 0;font-weight:500;}
+.cday{background:var(--sf2);border-radius:7px;min-height:64px;padding:4px;display:flex;flex-direction:column;gap:2px;border:.5px solid transparent;cursor:pointer;}
+.cday:hover:not(.cem){border-color:var(--bd);}
+.cday.ctd{border-color:#5588ff!important;}
+.cday.cwe{opacity:.3;}
+.cday.cof{opacity:.25;}
+.cday.cpr{background:#2a1515;border-color:#E05353;}
+.cday.cev{background:#141428;border-color:#5588ff55;}
+.cday.crep{background:#1a2a1a;border-color:#3DAA6A55;}
+.cday.csat{background:var(--sf2);border-color:#E8A83855;}
+.cday.cem{background:transparent;border:none;cursor:default;}
+.cnum{font-size:10px;color:var(--mu);font-family:'DM Mono',monospace;}
+.cday.ctd .cnum{color:#5588ff;font-weight:600;}
+.cblk{font-size:9px;font-weight:500;padding:2px 4px;border-radius:3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.cprl{font-size:9px;font-weight:600;padding:2px 4px;border-radius:3px;background:#E0535320;color:#E05353;}
+.cevl{font-size:9px;padding:2px 4px;border-radius:3px;background:#5588ff18;color:#5588ff;}
+.crpl{font-size:9px;padding:2px 4px;border-radius:3px;background:#3DAA6A18;color:#3DAA6A;}
+.cstl{font-size:9px;padding:2px 4px;border-radius:3px;background:#E8A83818;color:#E8A838;}
+.legend{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:1.5rem;}
+.li{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--mu);}
+.ld{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
+/* TODOS */
+.tc{background:var(--sf);border:.5px solid var(--bd);border-radius:var(--r);overflow:hidden;margin-bottom:1.5rem;}
+.fse{border-bottom:.5px solid var(--bd);}
+.fse:last-child{border-bottom:none;}
+.fhd{display:flex;align-items:center;gap:10px;padding:12px 1.25rem;cursor:pointer;user-select:none;}
+.fhd:hover{background:var(--sf2);}
+.fdo{width:9px;height:9px;border-radius:50%;flex-shrink:0;}
+.fti{font-size:14px;font-weight:500;}
+.fdt{font-size:11px;color:var(--mu);font-family:'DM Mono',monospace;}
+.fpr{margin-left:auto;font-size:12px;color:var(--mu);}
+.fch{color:var(--fa);transition:transform .2s;flex-shrink:0;}
+.fch.open{transform:rotate(180deg);}
+.fpw{height:2px;background:var(--bd);margin:0 1.25rem;}
+.fpb{height:2px;transition:width .3s;}
+.fbd{display:none;padding:0 1.25rem 12px;}
+.fbd.open{display:block;}
+.sl{font-size:10px;color:var(--fa);font-weight:500;letter-spacing:.06em;text-transform:uppercase;padding:10px 0 5px;}
+.tr{display:flex;align-items:center;gap:10px;padding:5px 0;border-bottom:.5px solid var(--bd);cursor:pointer;user-select:none;}
+.tr:last-child{border-bottom:none;}
+.tr:hover{opacity:.8;}
+.tck{width:15px;height:15px;border-radius:4px;border:1px solid var(--fa);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .15s;}
+.tck.done{border-color:transparent;}
+.tl{font-size:13px;}
+.tl.done{color:var(--mu);text-decoration:line-through;}
+.tbg{margin-left:auto;font-size:10px;font-weight:500;padding:2px 7px;border-radius:10px;flex-shrink:0;}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div style="margin-bottom:1.5rem;"><p class="lbl">ETH BSc MaschIng · Sommer 2026</p></div>
+<div class="card" id="ov"></div>
+<p class="lbl">Heute</p>
+<div class="card" id="td"></div>
+<p class="lbl">Kalender</p>
+<div class="card" style="padding:.75rem 1rem;">
+  <div class="cnav"><button id="pb">&#8592;</button><span class="cmo" id="cm"></span><button id="nb">&#8594;</button></div>
+  <div class="cgr" id="cdow"></div>
+  <div id="cb"></div>
+</div>
+<div class="legend" id="leg"></div>
+<p class="lbl">Todos nach Fälligkeit</p>
+<div class="tc" id="tc"></div>
+</div>
+<script>
+const FA=[
+  {id:'thermo2',name:'Thermodynamics II',sh:'Thermo II',date:'2026-08-03',time:'12:00–14:00',col:'#E8A838',
+   serien:['Serie 1 — CAPS','Serie 2 — CAPS','Serie 3 — CAPS','Serie 4 — CAPS','Serie 5 — CAPS','Serie 1 — PRE','Serie 2 — PRE','Serie 3 — PRE','Serie 4 — PRE','Serie 5 — PRE'],
+   pruef:['Prüfung 1 — HS25','Prüfung 2 — FS25','Prüfung 3 — HS24','Prüfung 4 — FS24']},
+  {id:'quantum',name:'Quantum Mechanics',sh:'Quantum',date:'2026-08-05',time:'08:30–10:30',col:'#9370DB',
+   serien:['Serie 1','Serie 2','Serie 3','Serie 4','Serie 5','Serie 6','Serie 7','Serie 8','Serie 9','Serie 10','Serie 11','Serie 12'],
+   pruef:['Prüfung 1','Prüfung 2','Prüfung 3','Prüfung 4','Prüfung 5','Prüfung 6']},
+  {id:'sml',name:'Stochastics & ML',sh:'SML',date:'2026-08-07',time:'09:30–11:30',col:'#3DAA6A',
+   serien:['Serie 1','Serie 2','Serie 3','Serie 4','Serie 5','Serie 6','Serie 7','Serie 8','Serie 9','Serie 10','Serie 11','Serie 12','Serie 13','Serie 14 — Coding'],
+   pruef:['Prüfung 1','Prüfung 2','Prüfung 3']},
+  {id:'werkstoffe',name:'Werkstoffe & Fertigung',sh:'Werkstoffe',date:'2026-08-10',time:'09:30–11:15',col:'#C4845A',
+   serien:['Serie 1','Serie 2','Serie 3','Serie 4','Serie 5','Serie 6','Serie 7','Serie 8','Serie 9','Serie 10','Serie 11','Serie 12'],
+   pruef:['Mock Exam 1','Mock Exam 2']},
+  {id:'fluid_fund',name:'Fluid Dynamics Fund.',sh:'Fluid Fund.',date:'2026-08-12',time:'08:30–10:00',col:'#3A86D4',
+   serien:['Serie 1','Serie 2','Serie 3','Serie 4','Serie 5','Serie 6'],
+   pruef:['Prüfung 1','Prüfung 2','Prüfung 3','Prüfung 4','Prüfung 5','Midterm 1','Midterm 2']},
+  {id:'thermo3',name:'Thermodynamics III',sh:'Thermo III',date:'2026-08-14',time:'13:00–15:00',col:'#E05353',
+   serien:['Serie 1','Serie 2','Serie 3','Serie 4','Serie 5','Serie 6','Serie 7','Serie 8','Serie 9','Serie 10','Serie 11','Serie 12','Serie 13'],
+   pruef:['Prüfung 1','Prüfung 2','Prüfung 3','Prüfung 4','Prüfung 5','Prüfung 6']},
+  {id:'control',name:'Control Systems II',sh:'Control Sys.',date:'2026-08-17',time:'15:30–18:00',col:'#D4609A',
+   serien:['Serie 1','Serie 2','Serie 3','Serie 4','Serie 5','Serie 6','Serie 7','Serie 8','Serie 9','Serie 10','Serie 11','Serie 12','Serie 13'],
+   pruef:['Prüfung 1','Prüfung 2','Prüfung 3','Prüfung 4','Prüfung 5','Prüfung 6','Prüfung 7']},
+  {id:'fluid_adv',name:'Fluid Dynamics Adv.',sh:'Fluid Adv.',date:'2026-08-19',time:'16:00–18:00',col:'#888899',
+   serien:['Serie 1','Serie 2','Serie 3','Serie 4','Serie 5','Serie 6'],
+   pruef:['Prüfung 1','Prüfung 2','Prüfung 3','Prüfung 4','Prüfung 5','Midterm 1','Midterm 2']},
+];
+
+const SC={
+  '2026-06-01':[['thermo2','serie',1,"Serie 1 & 2"],['quantum','serie',1,"Serie 1 & 2"]],
+  '2026-06-02':[['sml','serie',1,"Serie 1 & 2"],['werkstoffe','serie',1,"Serie 1 & 2"]],
+  '2026-06-03':[['fluid_fund','serie',1,"Serie 1 & 2"],['thermo3','serie',1,"Serie 1 & 2"]],
+  '2026-06-04':[['control','serie',1,"Serie 1 & 2"],['fluid_adv','serie',1,"Serie 1 & 2"]],
+  '2026-06-05':[['thermo2','serie',3,"Serie 3 & 4"],['quantum','serie',3,"Serie 3 & 4"]],
+  '2026-06-06':[['sml','serie',3,"Serie 3 & 4"],['werkstoffe','serie',3,"Serie 3 & 4"]],
+  '2026-06-09':[['fluid_fund','serie',3,"Serie 3 & 4"],['thermo3','serie',3,"Serie 3 & 4"]],
+  '2026-06-10':[['control','serie',3,"Serie 3 & 4"],['fluid_adv','serie',3,"Serie 3 & 4"]],
+  '2026-06-11':[['thermo2','serie',5,"Serie 5 & 6"],['quantum','serie',5,"Serie 5 & 6"]],
+  '2026-06-12':[['sml','serie',5,"Serie 5 & 6"],['werkstoffe','serie',5,"Serie 5 & 6"]],
+  '2026-06-13':[['fluid_fund','serie',5,"Serie 5 & 6"],['thermo3','serie',5,"Serie 5 & 6"]],
+  '2026-06-15':[['control','serie',5,"Serie 5 & 6"],['fluid_adv','serie',5,"Serie 5 & 6"]],
+  '2026-06-16':[['thermo2','serie',7,"Serie 7 & 8"],['quantum','serie',7,"Serie 7 & 8"]],
+  '2026-06-17':[['sml','serie',7,"Serie 7 & 8"],['werkstoffe','serie',7,"Serie 7 & 8"]],
+  '2026-06-18':[['thermo3','serie',7,"Serie 7 & 8"],['control','serie',7,"Serie 7 & 8"]],
+  '2026-06-19':[['thermo2','serie',9,"Serie 9 & 10"],['quantum','serie',9,"Serie 9 & 10"]],
+  '2026-06-25':[['sml','serie',9,"Serie 9 & 10"],['werkstoffe','serie',9,"Serie 9 & 10"]],
+  '2026-06-26':[['thermo3','serie',9,"Serie 9 & 10"],['control','serie',9,"Serie 9 & 10"]],
+  '2026-06-27':[['quantum','serie',11,"Serie 11 & 12"],['sml','serie',11,"Serie 11 & 12"]],
+  '2026-06-30':[['werkstoffe','serie',11,"Serie 11 & 12"],['thermo3','serie',11,"Serie 11 & 12"]],
+  '2026-07-01':[['control','serie',11,"Serie 11 & 12"],['sml','serie',13,"Serie 13 & 14"]],
+  '2026-07-02':[['thermo3','serie',13,"Serie 13"],['control','serie',13,"Serie 13"]],
+  '2026-07-03':[['thermo2','pruef',1,"Prüfung 1"],['quantum','pruef',1,"Prüfung 1 & 2"]],
+  '2026-07-06':[['sml','pruef',1,"Prüfung 1"],['fluid_fund','pruef',1,"Prüfung 1"]],
+  '2026-07-07':[['thermo3','pruef',1,"Prüfung 1"],['control','pruef',1,"Prüfung 1"]],
+  '2026-07-08':[['fluid_adv','pruef',1,"Prüfung 1"],['thermo2','pruef',2,"Prüfung 2"]],
+  '2026-07-09':[['quantum','pruef',3,"Prüfung 3 & 4"],['fluid_fund','pruef',2,"Prüfung 2"]],
+  '2026-07-10':[['thermo3','pruef',2,"Prüfung 2"],['control','pruef',2,"Prüfung 2"]],
+  '2026-07-13':[['fluid_adv','pruef',2,"Prüfung 2"],['quantum','pruef',5,"Prüfung 5 & 6"]],
+  '2026-07-14':[['fluid_fund','pruef',3,"Prüfung 3"],['thermo3','pruef',3,"Prüfung 3"]],
+  '2026-07-15':[['control','pruef',3,"Prüfung 3"],['fluid_adv','pruef',3,"Prüfung 3"]],
+  '2026-07-16':[['quantum','pruef',7,"Prüfung 7 & 8"],['fluid_fund','pruef',4,"Prüfung 4"]],
+  '2026-07-17':[['thermo3','pruef',4,"Prüfung 4"],['control','pruef',4,"Prüfung 4"]],
+  '2026-07-20':[['fluid_adv','pruef',4,"Prüfung 4"],['quantum','pruef',9,"Prüfung 9 & 10"]],
+  '2026-07-21':[['fluid_fund','pruef',5,"Prüfung 5"],['control','pruef',5,"Prüfung 5"]],
+  '2026-07-22':[['fluid_adv','pruef',5,"Prüfung 5"],['quantum','pruef',11,"Prüfung 11 & 12"]],
+  '2026-07-23':[['fluid_fund','midterm',1,"Midterm 1–2"],['fluid_adv','midterm',1,"Midterm 1–3"]],
+  '2026-07-24':[['quantum','pruef',13,"Prüfung 13 & 14"],['fluid_fund','midterm',3,"Midterm 3–4"]],
+  '2026-07-27':[['fluid_fund','midterm',5,"Midterm 5–6"],['fluid_adv','midterm',4,"Midterm 4–6"]],
+  '2026-08-02':[['thermo2','pruef',3,"Prüfung 3"],['thermo2','pruef',4,"Prüfung 4"]],
+  '2026-08-04':[['quantum','pruef',15,"Prüfung 15 & 16"],['quantum','pruef',17,"Prüfung 17"]],
+  '2026-08-06':[['sml','pruef',2,"Prüfung 2"],['sml','pruef',3,"Prüfung 3"]],
+  '2026-08-09':[['werkstoffe','pruef',1,"Prüfung 1"],['werkstoffe','pruef',2,"Prüfung 2"]],
+  '2026-08-11':[['fluid_fund','midterm',7,"Midterm 7–8"],['fluid_fund','midterm',9,"Midterm 9–10"]],
+  '2026-08-13':[['thermo3','pruef',5,"Prüfung 5"],['thermo3','pruef',6,"Prüfung 6"]],
+  '2026-08-16':[['control','pruef',6,"Prüfung 6"],['control','pruef',7,"Prüfung 7"]],
+  '2026-08-18':[['fluid_adv','midterm',4,"Midterm 4–6"],['fluid_adv','midterm',7,"Midterm 7–8"]],
+};
+
+const EVENTS={
+  '2026-06-08':'Europapark 🎢',
+  '2026-06-20':'Pürro Besuch','2026-06-21':'Pürro Besuch','2026-06-22':'Pürro Besuch',
+  '2026-06-23':'Pürro Besuch','2026-06-24':'Pürro Besuch',
+  '2026-06-28':'Timo Ironman 🏊','2026-06-29':'Timo Ironman 🏊',
+};
+const SAT_LEARN=new Set(['2026-06-06','2026-06-13','2026-06-27']);
+const OFF=new Set([...Object.keys(EVENTS),'2026-08-03','2026-08-05','2026-08-07','2026-08-10','2026-08-12','2026-08-14','2026-08-17','2026-08-19']);
+const PRUEF=new Set(FA.map(f=>f.date));
+const REP=new Set(['2026-08-02','2026-08-04','2026-08-06','2026-08-09','2026-08-11','2026-08-13','2026-08-16','2026-08-18']);
+
+function tk(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
+function gf(id){return FA.find(f=>f.id===id);}
+function load(){try{return JSON.parse(localStorage.getItem('lp26')||'{}');}catch(e){return{};}}
+function sv(c){localStorage.setItem('lp26',JSON.stringify(c));}
+let C=load();
+
+const CHKSVG=`<svg width="10" height="10" viewBox="0 0 10 10" fill="none"><polyline points="1.5,5 4,7.5 8.5,2.5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+const CHEVSVG=`<svg width="12" height="12" viewBox="0 0 12 12" fill="none"><polyline points="2,4 6,8 10,4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>`;
+
+function calcP(){
+  let tot=0,dn=0;
+  FA.forEach(f=>{f.serien.forEach((_,i)=>{tot++;if(C[f.id+'_s_'+i])dn++;});f.pruef.forEach((_,i)=>{tot++;if(C[f.id+'_p_'+i])dn++;});});
+  return{tot,dn,pct:tot>0?Math.round(dn/tot*100):0};
+}
+function rOv(){
+  const{tot,dn,pct}=calcP();
+  const fb=FA.map(f=>{
+    const ds=f.serien.filter((_,i)=>C[f.id+'_s_'+i]).length,dp=f.pruef.filter((_,i)=>C[f.id+'_p_'+i]).length;
+    const t=f.serien.length+f.pruef.length,p=t>0?Math.round((ds+dp)/t*100):0;
+    return`<div class="fb"><div class="fbn" style="color:${f.col}">${f.sh}</div><div class="fbbw"><div class="fbb" style="width:${p}%;background:${f.col}"></div></div></div>`;
+  }).join('');
+  document.getElementById('ov').innerHTML=`<div class="ov-top"><span class="ov-ti">Gesamtfortschritt · ${dn} von ${tot} erledigt</span><span class="ov-pct">${pct}%</span></div><div class="bw"><div class="bb" style="width:${pct}%"></div></div><div class="fbars">${fb}</div>`;
+}
+
+let vd=new Date();
+const DN=['Sonntag','Montag','Dienstag','Mittwoch','Donnerstag','Freitag','Samstag'];
+const MN=['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'];
+
+function rTd(){
+  const key=tk(vd),isToday=key===tk(new Date());
+  const dl=DN[vd.getDay()]+', '+vd.getDate()+'. '+MN[vd.getMonth()]+' '+vd.getFullYear();
+  const isWE=vd.getDay()===0||vd.getDay()===6,isOff=OFF.has(key)||isWE,sc=SC[key];
+  const isPr=PRUEF.has(key),isRep=REP.has(key),ev=EVENTS[key];
+  const isSatLearn=SAT_LEARN.has(key);
+
+  let h=`<div class="tnav">
+    <button onclick="chD(-1)">&#8592;</button>
+    <span class="tdate">${dl}${isToday?' <span style="font-size:11px;color:#5588ff;font-weight:400;">· Heute</span>':''}</span>
+    <button onclick="chD(1)">&#8594;</button>
+    <button onclick="goTd()">Heute</button>
+  </div>`;
+
+  if(isPr){
+    const pf=FA.find(f=>f.date===key);
+    h+=`<p style="font-size:14px;color:#E05353;padding:4px 0;">🎯 Prüfungstag — ${pf?pf.name:''} · ${pf?pf.time:''}</p>`;
+  } else if(ev){
+    h+=`<p style="font-size:14px;color:#5588ff;padding:4px 0;">📅 ${ev} — Frei!</p>`;
+  } else if(isRep&&sc){
+    const f=gf(sc[0][0]);
+    h+=`<p style="font-size:13px;color:#3DAA6A;margin-bottom:10px;">🔄 Repetitionstag — morgen Prüfung ${f?f.name:''}</p>`;
+    const slots=[{icon:'🌅',time:'08:00–12:00'},{icon:'☀️',time:'13:30–17:30'}];
+    sc.forEach((task,i)=>{
+      if(!task)return;const f2=gf(task[0]);if(!f2)return;
+      const ck=C['td_'+key+'_'+i]||false;
+      h+=`<div class="bi" onclick="togTd('${key}',${i})"><div class="bck ${ck?'done':''}" style="${ck?'background:'+f2.col:''}">${ck?CHKSVG:''}</div><span class="btime">${slots[i].icon} ${slots[i].time}</span><span class="bname ${ck?'done':''}">${f2.sh}</span><span class="bdet">${task[3]}</span><span class="btag" style="background:#3DAA6A22;color:#3DAA6A;">Repetition</span></div>`;
+    });
+  } else if(!sc||(isOff&&!isSatLearn)){
+    h+=`<p class="tfree">${isWE&&!isSatLearn?'Wochenende — frei! 🌿':'Kein Lernblock heute — frei! 🌿'}</p>`;
+  } else {
+    const slots=[{icon:'🌅',time:'08:00–12:00',lbl:'Morgen'},{icon:'☀️',time:'13:30–17:30',lbl:'Nachmittag'}];
+    if(isSatLearn)h+=`<p style="font-size:12px;color:#E8A838;margin-bottom:10px;">⚡ Lern-Samstag (nötig für den Plan)</p>`;
+    sc.forEach((task,i)=>{
+      if(!task)return;const f=gf(task[0]);if(!f)return;
+      const ck=C['td_'+key+'_'+i]||false;
+      const tlbl=task[1]==='serie'?'Serien':'Altprüfung';
+      h+=`<div class="bi" onclick="togTd('${key}',${i})"><div class="bck ${ck?'done':''}" style="${ck?'background:'+f.col:''}">${ck?CHKSVG:''}</div><span class="btime">${slots[i].icon} ${slots[i].time}</span><span class="bname ${ck?'done':''}">${f.sh}</span><span class="bdet">${task[3]}</span><span class="btag" style="background:${f.col}22;color:${f.col};">${tlbl}</span></div>`;
+    });
+  }
+  document.getElementById('td').innerHTML=h;
+}
+function chD(d){vd=new Date(vd);vd.setDate(vd.getDate()+d);rTd();}
+function goTd(){vd=new Date();rTd();}
+function togTd(key,i){C['td_'+key+'_'+i]=!C['td_'+key+'_'+i];sv(C);rTd();rOv();}
+
+let cm=Math.max(5,new Date().getMonth()),cy=2026;
+function rCal(){
+  document.getElementById('cm').textContent=MN[cm]+' '+cy;
+  document.getElementById('cdow').innerHTML=['Mo','Di','Mi','Do','Fr','Sa','So'].map(d=>`<div class="cdow">${d}</div>`).join('');
+  const body=document.getElementById('cb');body.innerHTML='';
+  const today=tk(new Date());
+  const fd=new Date(cy,cm,1);let dow=fd.getDay();if(dow===0)dow=7;
+  const dim=new Date(cy,cm+1,0).getDate();
+  for(let w=0;w<Math.ceil((dow-1+dim)/7);w++){
+    const row=document.createElement('div');row.className='cgr';row.style.cssText='gap:3px;margin-bottom:3px;';
+    for(let d=1;d<=7;d++){
+      const dn=w*7+d-(dow-1);const cell=document.createElement('div');
+      if(dn<1||dn>dim){cell.className='cem';row.appendChild(cell);continue;}
+      const ds=cy+'-'+String(cm+1).padStart(2,'0')+'-'+String(dn).padStart(2,'0');
+      const isT=ds===today,isW=d>=6,isPr=PRUEF.has(ds),isOf=OFF.has(ds),ev=EVENTS[ds],isRp=REP.has(ds),isSL=SAT_LEARN.has(ds);
+      let cls='cday';
+      if(isT)cls+=' ctd';
+      else if(isPr)cls+=' cpr';
+      else if(isRp)cls+=' crep';
+      else if(ev)cls+=' cev';
+      else if(isSL)cls+=' csat';
+      else if(isW)cls+=' cwe';
+      else if(isOf)cls+=' cof';
+      cell.className=cls;
+      cell.innerHTML=`<span class="cnum">${dn}</span>`;
+      cell.onclick=()=>{vd=new Date(ds+'T12:00:00');rTd();window.scrollTo({top:0,behavior:'smooth'});};
+      const sc=SC[ds];
+      if(sc&&!isOf&&(!isW||isSL)){
+        const f0=gf(sc[0][0]),f1=sc[1]?gf(sc[1][0]):null;
+        if(f0){
+          const isRep0=sc[0][1]==='rep';
+          if(isRep0){cell.innerHTML+=`<div class="crpl">🔄 ${f0.sh}</div><div class="crpl">Formelblatt</div>`;}
+          else{
+            cell.innerHTML+=`<div class="cblk" style="background:${f0.col}25;color:${f0.col};">${f0.sh} · ${sc[0][3]}</div>`;
+            if(f1&&f1.id!==f0.id)cell.innerHTML+=`<div class="cblk" style="background:${f1.col}25;color:${f1.col};">${f1.sh} · ${sc[1][3]}</div>`;
+            else if(f1&&sc[1])cell.innerHTML+=`<div class="cblk" style="background:${f1.col}25;color:${f1.col};">${sc[1][3]}</div>`;
+          }
+        }
+      }
+      if(isPr){const pf=FA.find(f=>f.date===ds);cell.innerHTML+=`<div class="cprl">🎯 ${pf?pf.sh:''}</div>`;}
+      if(ev)cell.innerHTML+=`<div class="cevl">${ev}</div>`;
+      if(isSL&&!isOf)cell.innerHTML+=`<div class="cstl">⚡ Lern-Sa</div>`;
+      row.appendChild(cell);
+    }
+    body.appendChild(row);
+  }
+}
+document.getElementById('pb').onclick=()=>{if(cm>5){cm--;rCal();}};
+document.getElementById('nb').onclick=()=>{if(cm<7){cm++;rCal();}};
+
+function rLeg(){
+  document.getElementById('leg').innerHTML=
+    FA.map(f=>`<div class="li"><div class="ld" style="background:${f.col}"></div>${f.sh} · ${f.date.slice(5).replace('-','.')}</div>`).join('')+
+    `<div class="li"><div class="ld" style="background:#3DAA6A"></div>Repetition</div>`+
+    `<div class="li"><div class="ld" style="background:#5588ff"></div>Event/Frei</div>`+
+    `<div class="li"><div class="ld" style="background:#E05353"></div>Prüfung</div>`+
+    `<div class="li"><div class="ld" style="background:#E8A838"></div>Lern-Samstag</div>`;
+}
+
+function rTodos(){
+  document.getElementById('tc').innerHTML=FA.map(f=>{
+    const ds=f.serien.filter((_,i)=>C[f.id+'_s_'+i]).length,dp=f.pruef.filter((_,i)=>C[f.id+'_p_'+i]).length;
+    const tot=f.serien.length+f.pruef.length,dn=ds+dp,pct=tot>0?Math.round(dn/tot*100):0;
+    const sr=f.serien.map((s,i)=>{const ck=C[f.id+'_s_'+i]||false;
+      return`<div class="tr" onclick="togT('${f.id}','s',${i})"><div class="tck ${ck?'done':''}" style="${ck?'background:'+f.col+';border-color:'+f.col:''}">${ck?CHKSVG:''}</div><span class="tl ${ck?'done':''}">${s}</span></div>`;}).join('');
+    const pr=f.pruef.map((p,i)=>{const ck=C[f.id+'_p_'+i]||false;
+      return`<div class="tr" onclick="togT('${f.id}','p',${i})"><div class="tck ${ck?'done':''}" style="${ck?'background:'+f.col+';border-color:'+f.col:''}">${ck?CHKSVG:''}</div><span class="tl ${ck?'done':''}">${p}</span><span class="tbg" style="background:${f.col}22;color:${f.col};">Prüfung</span></div>`;}).join('');
+    return`<div class="fse"><div class="fhd" onclick="togF('${f.id}')"><div class="fdo" style="background:${f.col}"></div><span class="fti">${f.name}</span><span class="fdt">${f.date.slice(5).replace('-','.')} · ${f.time}</span><span class="fpr">${dn}/${tot}</span><span class="fch" id="ch-${f.id}">${CHEVSVG}</span></div><div class="fpw"><div class="fpb" style="width:${pct}%;background:${f.col}"></div></div><div class="fbd" id="bd-${f.id}"><div class="sl">Serien</div>${sr}<div class="sl">Altprüfungen</div>${pr}</div></div>`;
+  }).join('');
+}
+function togF(id){document.getElementById('bd-'+id).classList.toggle('open');document.getElementById('ch-'+id).classList.toggle('open');}
+function togT(fId,t,i){const k=fId+'_'+t+'_'+i;C[k]=!C[k];sv(C);rTodos();rOv();}
+
+rOv();rTd();rCal();rLeg();rTodos();
+</script>
+</body>
+</html>
