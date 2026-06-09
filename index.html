@@ -1,0 +1,1535 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sessionsplan Sommer 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#EBEDE7; --panel:#FBFBF8; --card:#FFFFFF; --ink:#15181A; --muted:#6A726C;
+  --line:#DEE0D8; --line2:#E9EAE3; --accent:#0E6E62; --done:#2E7D4F;
+  --radius:14px; --shadow:0 1px 2px rgba(20,24,26,.04),0 8px 24px rgba(20,24,26,.05);
+  --mono:'IBM Plex Mono',ui-monospace,monospace;
+  --disp:'Space Grotesk',system-ui,sans-serif; --body:'Inter',system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);
+  font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased;padding-bottom:5rem}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+
+/* header */
+.top{position:sticky;top:0;z-index:20;background:rgba(235,237,231,.86);
+  backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.top__inner{display:flex;align-items:center;gap:18px;flex-wrap:wrap;padding:14px 20px;
+  max-width:1080px;margin:0 auto}
+.brand{display:flex;flex-direction:column;line-height:1.1}
+.brand b{font-family:var(--disp);font-weight:700;font-size:18px;letter-spacing:-.02em}
+.brand span{font-size:12px;color:var(--muted);letter-spacing:.04em;text-transform:uppercase}
+.prog{flex:1;min-width:200px}
+.prog__head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px}
+.prog__head small{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.05em}
+.prog__pct{font-family:var(--disp);font-weight:600;font-size:15px}
+.track{height:8px;border-radius:99px;background:var(--line2);overflow:hidden}
+.track i{display:block;height:100%;border-radius:99px;
+  background:linear-gradient(90deg,var(--accent),#1aa28f);width:0%;transition:width .5s ease}
+.actions{display:flex;gap:8px}
+.btn{font-family:var(--disp);font-weight:500;font-size:13px;border:1px solid var(--line);
+  background:var(--card);color:var(--ink);padding:8px 12px;border-radius:9px;cursor:pointer;
+  transition:border-color .15s,transform .05s}
+.btn:hover{border-color:var(--accent)}
+.btn:active{transform:translateY(1px)}
+.btn:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* hero countdown */
+.hero{padding:34px 0 8px}
+.hero h1{font-family:var(--disp);font-weight:700;font-size:clamp(26px,4vw,40px);
+  letter-spacing:-.03em;margin:0 0 4px}
+.hero p{margin:0;color:var(--muted);max-width:60ch}
+.next{margin-top:18px;display:inline-flex;align-items:baseline;gap:12px;
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  padding:14px 18px;box-shadow:var(--shadow)}
+.next b{font-family:var(--disp);font-size:30px;font-weight:700;line-height:1}
+.next .lbl{color:var(--muted);font-size:13px}
+.next .nm{font-weight:600}
+
+/* exam rail */
+.rail{margin:26px 0 8px}
+.rail__grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(232px,1fr));gap:14px}
+.exam{background:var(--card);border:1px solid var(--line);border-top:3px solid var(--c);
+  border-radius:var(--radius);padding:15px 16px 16px;box-shadow:var(--shadow);
+  display:flex;flex-direction:column;gap:8px}
+.exam__head{display:flex;align-items:center;gap:8px}
+.exam__tag{font-family:var(--mono);font-size:11px;font-weight:500;color:#fff;background:var(--c);
+  padding:2px 7px;border-radius:6px;letter-spacing:.02em}
+.exam__name{font-family:var(--disp);font-size:14px;font-weight:600;margin:0;line-height:1.2}
+.exam__date{margin:0;font-size:12.5px;color:var(--muted)}
+.exam__count{margin:0;font-size:12px;color:var(--c);font-weight:500}
+.gauge{margin-top:2px;display:flex;flex-direction:column;gap:3px}
+.gauge__row{display:flex;justify-content:space-between;font-size:11.5px;color:var(--muted);
+  margin-top:5px}
+.bar{height:6px;background:var(--line2);border-radius:99px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--c);border-radius:99px;transition:width .45s ease}
+.bar--alt i{opacity:.55}
+
+/* legend */
+.legend{display:flex;flex-wrap:wrap;gap:7px 16px;margin:20px 0 4px;font-size:12.5px;color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.dot{width:11px;height:11px;border-radius:4px;display:inline-block}
+.dot--vt{background:repeating-linear-gradient(45deg,#15181A,#15181A 2px,transparent 2px,transparent 4px);border:1px solid var(--line)}
+.dot--exam{background:#15181A}
+.dot--soft{background:var(--line)}
+
+/* schedule */
+.week{margin-top:26px}
+.week__title{display:flex;align-items:baseline;gap:12px;margin:0 0 10px;
+  font-family:var(--disp);font-weight:600;font-size:14px}
+.week__title .mono{color:var(--accent);font-size:12px}
+.week__range{color:var(--muted);font-weight:400;font-size:13px}
+.week__days{display:flex;flex-direction:column;gap:8px}
+.day{display:grid;grid-template-columns:64px 1fr;gap:12px;background:var(--card);
+  border:1px solid var(--line);border-radius:var(--radius);padding:12px;box-shadow:var(--shadow)}
+.day--we{background:transparent;border-style:dashed;box-shadow:none}
+.day--exam{border-color:#15181A;border-width:1.5px}
+.day--vt{background:#FAF7F1}
+.day__date{display:flex;flex-direction:column;align-items:center;justify-content:center;
+  border-right:1px solid var(--line2);padding-right:6px}
+.day__num{font-family:var(--disp);font-weight:700;font-size:24px;line-height:1}
+.day__wd{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-top:2px}
+.day--exam .day__num{color:#15181A}
+.day__slots{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+
+.slot{display:flex;gap:10px;align-items:flex-start;border:1px solid var(--line2);
+  border-radius:10px;padding:10px 11px;min-height:58px}
+.slot--study{cursor:pointer;border-left:3px solid var(--c);background:#fff;
+  transition:background .15s,border-color .15s}
+.slot--study:hover{background:#FCFCFA}
+.slot--vt{background:#FBF6EE}
+.slot--exam{border:1.5px solid var(--c);border-left:4px solid var(--c);background:#fff}
+.slot--soft{border-style:dashed;background:transparent}
+.slot--weekend{grid-column:1/-1;justify-content:center;align-items:center;min-height:44px}
+.slot input{position:absolute;opacity:0;width:0;height:0}
+.slot__check{flex:none;width:20px;height:20px;border:1.7px solid var(--c);border-radius:6px;
+  margin-top:1px;position:relative;transition:background .15s}
+.slot__check::after{content:"";position:absolute;left:6px;top:2px;width:5px;height:10px;
+  border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg) scale(0);
+  transition:transform .15s}
+.slot input:checked + .slot__check{background:var(--c)}
+.slot input:checked + .slot__check::after{transform:rotate(45deg) scale(1)}
+.slot--study:has(input:checked) .slot__task{text-decoration:line-through;color:var(--muted)}
+.slot--study:has(input:checked){background:#F6F8F5;border-left-color:var(--done)}
+.slot__body{display:flex;flex-direction:column;gap:3px;min-width:0}
+.slot__top{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.slot__when{font-size:10.5px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)}
+.slot__subj{font-family:var(--disp);font-weight:600;font-size:12.5px;color:var(--c)}
+.slot__task{font-size:13px;line-height:1.35}
+.slot__task--soft{color:var(--muted);font-style:italic}
+.badge{font-family:var(--mono);font-size:9.5px;text-transform:uppercase;letter-spacing:.05em;
+  padding:1px 6px;border-radius:5px}
+.badge--vt{background:#15181A;color:#fff}
+.badge--exam{background:var(--c);color:#fff;font-size:10.5px;padding:2px 8px}
+
+/* today */
+.day.today{box-shadow:0 0 0 2px var(--accent),var(--shadow)}
+.day.today .day__num{color:var(--accent)}
+
+footer{margin:42px 0 0;padding-top:18px;border-top:1px solid var(--line);
+  color:var(--muted);font-size:12.5px}
+
+@media(max-width:620px){
+  .day{grid-template-columns:48px 1fr}
+  .day__slots{grid-template-columns:1fr}
+  .next b{font-size:24px}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="top__inner">
+    <div class="brand"><b>Sessionsplan</b><span>Sommer 2026</span></div>
+    <div class="prog">
+      <div class="prog__head"><small>Fortschritt gesamt</small>
+        <span class="prog__pct" id="pct">0%</span></div>
+      <div class="track"><i id="overall"></i></div>
+    </div>
+    <div class="actions">
+      <button class="btn" id="jump">Zu heute</button>
+      <button class="btn" id="reset">Zurücksetzen</button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero">
+    <h1>10 Wochen, 8 Prüfungen.</h1>
+    <p>Jeder Werktag zwei Halbtage, ein Fach pro Halbtag. Erst alle Serien, dann Altprüfungen.
+       Hak ab, was erledigt ist – dein Fortschritt wird im Browser gespeichert.</p>
+    <div class="next" id="nextbox">
+      <b id="nextdays">–</b>
+      <span><span class="lbl">Tage bis</span><br><span class="nm" id="nextname">–</span></span>
+    </div>
+  </section>
+
+  <section class="rail">
+    <div class="rail__grid">
+      <article class="exam" style="--c:#C0492B" data-subj="THE2" data-exam="2026-08-03">
+        <header class="exam__head">
+          <span class="exam__tag">THE2</span>
+          <h3 class="exam__name">Thermodynamics II</h3>
+        </header>
+        <p class="exam__date"><span class="mono">3. August</span> &middot; 12:00–14:00</p>
+        <p class="exam__count mono" data-count="THE2">–</p>
+        <div class="gauge">
+          <div class="gauge__row"><span>Serien</span><span class="mono" data-ser="THE2">0/0</span></div>
+          <div class="bar"><i data-serbar="THE2" style="width:0%"></i></div>
+          <div class="gauge__row"><span>Altprüfungen</span><span class="mono" data-alt="THE2">0/0</span></div>
+          <div class="bar bar--alt"><i data-altbar="THE2" style="width:0%"></i></div>
+        </div>
+      </article>
+      <article class="exam" style="--c:#6D4AA8" data-subj="QM" data-exam="2026-08-05">
+        <header class="exam__head">
+          <span class="exam__tag">QM</span>
+          <h3 class="exam__name">Quantum Mechanics</h3>
+        </header>
+        <p class="exam__date"><span class="mono">5. August</span> &middot; 08:30–10:30</p>
+        <p class="exam__count mono" data-count="QM">–</p>
+        <div class="gauge">
+          <div class="gauge__row"><span>Serien</span><span class="mono" data-ser="QM">0/0</span></div>
+          <div class="bar"><i data-serbar="QM" style="width:0%"></i></div>
+          <div class="gauge__row"><span>Altprüfungen</span><span class="mono" data-alt="QM">0/0</span></div>
+          <div class="bar bar--alt"><i data-altbar="QM" style="width:0%"></i></div>
+        </div>
+      </article>
+      <article class="exam" style="--c:#2563B0" data-subj="STOCH" data-exam="2026-08-07">
+        <header class="exam__head">
+          <span class="exam__tag">STOCH</span>
+          <h3 class="exam__name">Stochastics & Machine Learning</h3>
+        </header>
+        <p class="exam__date"><span class="mono">7. August</span> &middot; 09:30–11:30</p>
+        <p class="exam__count mono" data-count="STOCH">–</p>
+        <div class="gauge">
+          <div class="gauge__row"><span>Serien</span><span class="mono" data-ser="STOCH">0/0</span></div>
+          <div class="bar"><i data-serbar="STOCH" style="width:0%"></i></div>
+          <div class="gauge__row"><span>Altprüfungen</span><span class="mono" data-alt="STOCH">0/0</span></div>
+          <div class="bar bar--alt"><i data-altbar="STOCH" style="width:0%"></i></div>
+        </div>
+      </article>
+      <article class="exam" style="--c:#8A6D3B" data-subj="WERK" data-exam="2026-08-10">
+        <header class="exam__head">
+          <span class="exam__tag">WERK</span>
+          <h3 class="exam__name">Werkstoffe und Fertigung</h3>
+        </header>
+        <p class="exam__date"><span class="mono">10. August</span> &middot; 09:30–11:15</p>
+        <p class="exam__count mono" data-count="WERK">–</p>
+        <div class="gauge">
+          <div class="gauge__row"><span>Serien</span><span class="mono" data-ser="WERK">0/0</span></div>
+          <div class="bar"><i data-serbar="WERK" style="width:0%"></i></div>
+          <div class="gauge__row"><span>Altprüfungen</span><span class="mono" data-alt="WERK">0/0</span></div>
+          <div class="bar bar--alt"><i data-altbar="WERK" style="width:0%"></i></div>
+        </div>
+      </article>
+      <article class="exam" style="--c:#1E8BA8" data-subj="FLF" data-exam="2026-08-12">
+        <header class="exam__head">
+          <span class="exam__tag">FLF</span>
+          <h3 class="exam__name">Fluid Dynamics: Fundamentals</h3>
+        </header>
+        <p class="exam__date"><span class="mono">12. August</span> &middot; 08:30–10:00</p>
+        <p class="exam__count mono" data-count="FLF">–</p>
+        <div class="gauge">
+          <div class="gauge__row"><span>Serien</span><span class="mono" data-ser="FLF">0/0</span></div>
+          <div class="bar"><i data-serbar="FLF" style="width:0%"></i></div>
+          <div class="gauge__row"><span>Altprüfungen</span><span class="mono" data-alt="FLF">0/0</span></div>
+          <div class="bar bar--alt"><i data-altbar="FLF" style="width:0%"></i></div>
+        </div>
+      </article>
+      <article class="exam" style="--c:#D97A2B" data-subj="THE3" data-exam="2026-08-14">
+        <header class="exam__head">
+          <span class="exam__tag">THE3</span>
+          <h3 class="exam__name">Thermodynamics III</h3>
+        </header>
+        <p class="exam__date"><span class="mono">14. August</span> &middot; 13:00–15:00</p>
+        <p class="exam__count mono" data-count="THE3">–</p>
+        <div class="gauge">
+          <div class="gauge__row"><span>Serien</span><span class="mono" data-ser="THE3">0/0</span></div>
+          <div class="bar"><i data-serbar="THE3" style="width:0%"></i></div>
+          <div class="gauge__row"><span>Altprüfungen</span><span class="mono" data-alt="THE3">0/0</span></div>
+          <div class="bar bar--alt"><i data-altbar="THE3" style="width:0%"></i></div>
+        </div>
+      </article>
+      <article class="exam" style="--c:#3E8E5A" data-subj="CTRL" data-exam="2026-08-17">
+        <header class="exam__head">
+          <span class="exam__tag">CTRL</span>
+          <h3 class="exam__name">Control Systems II</h3>
+        </header>
+        <p class="exam__date"><span class="mono">17. August</span> &middot; 15:30–18:00</p>
+        <p class="exam__count mono" data-count="CTRL">–</p>
+        <div class="gauge">
+          <div class="gauge__row"><span>Serien</span><span class="mono" data-ser="CTRL">0/0</span></div>
+          <div class="bar"><i data-serbar="CTRL" style="width:0%"></i></div>
+          <div class="gauge__row"><span>Altprüfungen</span><span class="mono" data-alt="CTRL">0/0</span></div>
+          <div class="bar bar--alt"><i data-altbar="CTRL" style="width:0%"></i></div>
+        </div>
+      </article>
+      <article class="exam" style="--c:#138086" data-subj="FLA" data-exam="2026-08-19">
+        <header class="exam__head">
+          <span class="exam__tag">FLA</span>
+          <h3 class="exam__name">Fluid Dynamics: Advanced</h3>
+        </header>
+        <p class="exam__date"><span class="mono">19. August</span> &middot; 16:00–18:00</p>
+        <p class="exam__count mono" data-count="FLA">–</p>
+        <div class="gauge">
+          <div class="gauge__row"><span>Serien</span><span class="mono" data-ser="FLA">0/0</span></div>
+          <div class="bar"><i data-serbar="FLA" style="width:0%"></i></div>
+          <div class="gauge__row"><span>Altprüfungen</span><span class="mono" data-alt="FLA">0/0</span></div>
+          <div class="bar bar--alt"><i data-altbar="FLA" style="width:0%"></i></div>
+        </div>
+      </article></div>
+  </section>
+
+  <div class="legend">
+    <span><i class="dot dot--exam"></i> Prüfung</span>
+    <span><i class="dot dot--vt"></i> Vortag (ganzer Tag, ein Fach)</span>
+    <span><i class="dot dot--soft"></i> frei / Puffer / Erholung</span>
+    <span>&nbsp; Halbtag-Regel: 2 Serien <b>oder</b> 1 Altprüfung</span>
+  </div>
+
+  
+    <section class="week">
+      <h2 class="week__title"><span class="mono">KW 24</span><span class="week__range">10. Juni – 14. Juni</span></h2>
+      <div class="week__days">
+      <div class="day" data-date="2026-06-10">
+        <div class="day__date"><span class="day__num mono">10</span><span class="day__wd">Mi</span></div>
+        <div class="day__slots">
+        <label class="slot slot--study" style="--c:#C0492B">
+          <input type="checkbox" data-key="2026-06-10:AM" data-subj="THE2" data-kind="serie">
+          <span class="slot__check" aria-hidden="true"></span>
+          <span class="slot__body">
+            <span class="slot__top"><span class="slot__when">Vormittag</span><span class="slot__subj">Thermo II</span></span>
+            <span class="slot__task">Serie 1–2</span>
+          </span>
+        </label>
+        <label class="slot slot--study" style="--c:#6D4AA8">
+          <input type="checkbox" data-key="2026-06-10:PM" data-subj="QM" data-kind="serie">
+          <span class="slot__check" aria-hidden="true"></span>
+          <span class="slot__body">
+            <span class="slot__top"><span class="slot__when">Nachmittag</span><span class="slot__subj">Quantum</span></span>
+            <span class="slot__task">Serie 1–2</span>
+          </span>
+        </label></div>
+      </div>
+      <div class="day" data-date="2026-06-11">
+        <div class="day__date"><span class="day__num mono">11</span><span class="day__wd">Do</span></div>
+        <div class="day__slots">
+        <label class="slot slot--study" style="--c:#2563B0">
+          <input type="checkbox" data-key="2026-06-11:AM" data-subj="STOCH" data-kind="serie">
+          <span class="slot__check" aria-hidden="true"></span>
+          <span class="slot__body">
+            <span class="slot__top"><span class="slot__when">Vormittag</span><span class="slot__subj">Stochastics</span></span>
+            <span class="slot__task">Serie 1–2</span>
+          </span>
+        </label>
+        <label class="slot slot--study" style="--c:#8A6D3B">
+          <input type="checkbox" data-key="2026-06-11:PM" data-subj="WERK" data-kind="serie">
+          <span class="slot__check" aria-hidden="true"></span>
+          <span class="slot__body">
+            <span class="slot__top"><span class="slot__when">Nachmittag</span><span class="slot__subj">Werkstoffe</span></span>
+            <span class="slot__task">Serie 1–2</span>
+          </span>
+        </label></div>
+      </div>
+      <div class="day" data-date="2026-06-12">
+        <div class="day__date"><span class="day__num mono">12</span><span class="day__wd">Fr</span></div>
+        <div class="day__slots">
+        <label class="slot slot--study" style="--c:#1E8BA8">
+          <input type="checkbox" data-key="2026-06-12:AM" data-subj="FLF" data-kind="serie">
+          <span class="slot__check" aria-hidden="true"></span>
+          <span class="slot__body">
+            <span class="slot__top"><span class="slot__when">Vormittag</span><span class="slot__subj">Fluid Fund.</span></span>
+            <span class="slot__task">Serie 1–2</span>
+          </span>
+        </label>
+        <label class="slot slot--study" style="--c:#D97A2B">
+          <input type="checkbox" data-key="2026-06-12:PM" data-subj="THE3" data-kind="serie">
+          <span class="slot__check" aria-hidden="true"></span>
+          <span class="slot__body">
+            <span class="slot__top"><span class="slot__when">Nachmittag</span><span class="slot__subj">Thermo III</span></span>
+            <span class="slot__task">Serie 1–2</span>
+          </span>
+        </label></div>
+      </div>
+      <div class="day day--we" data-date="2026-06-13">
+        <div class="day__date"><span class="day__num mono">13</span><span class="day__wd">Sa</span></div>
+        <div class="day__slots"><div class="slot slot--soft slot--weekend">
+          <span class="slot__body"><span class="slot__task slot__task--soft">Wochenende &middot; frei / Puffer für Überhang</span></span>
+        </div></div>
+      </div>
+      <div class="day day--we" data-date="2026-06-14">
+        <div class="day__date"><span class="day__num mono">14</span><span class="day__wd">So</span></div>
+        <div class="day__slots"><div class="slot slot--soft slot--weekend">
+          <span class="slot__body"><span class="slot__task slot__task--soft">Wochenende &middot; frei / Puffer für Überhang</span></span>
+        </div></div>
+      </div></div>
+    </section>
+    <section class="week">
+      <h2 class="week__title"><span class="mono">KW 25</span><span class="week__range">15. Juni – 21. Juni</span></h2>
+      <div class="week__days">
+      <div class="day" data-date="2026-06-15">
+        <div class="day__date"><span class="day__num mono">15</span><span class="day__wd">Mo</span></div>
+        <div class="day__slots">
+        <label class="slot slot--study" style="--c:#3E8E5A">
+          <input type="checkbox" data-key="2026-06-15:AM" data-subj="CTRL" data-kind="serie">
+          <span class="slot__check" aria-hidden="true"></span>
+          <span class="slot__body">
+            <span class="slot__top"><span class="slot__when">Vormittag</span><span class="slot__subj">Control II</span></span>
+            <span class="slot__task">Serie 1–2</span>
+          </span>
+        </label>
+        <label class="slot slot--study" style="--c:#138086">
+          <input type="checkbox" data-key="2026-06-15:PM" data-subj="FLA" data-kind="serie">
+          <span class="slot__check" aria-hidden="true"></span>
+          <span class="slot__body">
+            <span class="slot__top"><span class="slot__when">Nachmittag</span><span class="slot__subj">Fluid Adv.</span></span>
+            <span class="slot__task">Serie 1–2</span>
+          </span>
+        </label></div>
+      </div>
+      <div class="day" data-date="2026-06-16">
+        <div class="day__date"><span class="day__num mono">16</span><span class="day__wd">Di</span></div>
+        <div class="day__slots">
+        <label class="slot slot--study" style="--c:#C0492B">
+          <input type="checkbox" data-key="2026-06-16:AM" data-subj="THE2" data-kind="serie">
+          <span class="slot__check" aria-hidden="true"></span>
+          <span class="slot__body">
+            <span class="slot__top"><span class="slot__when">Vormittag</span><span class="slot__subj">Thermo II</span></span>
+            <span class="slot__task">Serie 3–4</span>
+          </span>
+        </label>
+        <label class="slot slot--study" style="--c:#6D4AA8">
+          <input type="checkbox" data-key="2026-06-16:PM" data-subj="QM" data-kind="serie">
+          <span class="slot__check" aria-hidden="true"></span>
+          <span class="slot__body">
+            <span class="slot__top"><span class="slot__when">Nachmittag</span><span class="slot__subj">Quantum</span></span>
+            <span class="slot__task">Serie 3–4</span>
+          </span>
+        </label></div>
+      </div>
+      <div class="day" data-date="2026-06-17">
+        <div class="day__date"><span class="day__num mono">17</span><span class="day__wd">Mi</span></div>
+        <div class="day__slots">
+        <label class="slot slot--study" style="--c:#2563B0">
+          <input type="checkbox" data-key="2026-06-17:AM" data-subj="STOCH" data-kind="serie">
+          <span class="slot__check" aria-hidden="true"></span>
+          <span class="slot__body">
+            <span class="slot__top"><span class="slot__when">Vormittag</span><span class="slot__subj">Stochastics</span></span>
+            <span class="slot__task">Serie 3–4</span>
+          </span>
+        </label>
+        <div class="slot slot--soft">
+          <span class="slot__body"><span class="slot__top"><span class="slot__when">Nachmittag</span></span>
+          <span class="slot__task slot__task--soft">Provinz-Konzert — ab Mittag frei</span></span>
+        </div></div>
+      </div>
+      <div class="day" data-date="2026-06-18">
+        <div class="day__date"><span class="day__num mono">18</span><span class="day__wd">Do</span></div>
+        <div class="day__slots">
+        <div class="slot slot--soft">
+          <span class="slot__body"><span class="slot__top"><span class="slot__when">Vormittag</span></span>
+          <span class="slot__task slot__task--soft">Konzert-Erholung</span></span>
+        </div>
+        <div class="slot slot--soft">
+          <span class="slot__body"><span class="slot__top"><span class="slot__when">Nachmittag</span></span>
+          <span class="slot__task slot__task--soft">Konzert-Erholung</span></span>
+        </div></div>
+      </div>
+      <div class="day" data-date="2026-06-19">
+        <div class="day__date"><span class="day__num mono">19</span><span class="day__wd">Fr</span></div>
+        <div class="day__slots">
+        <label class="slot slot--study" style="--c:#8A6D3B">
+          <input type="checkbox" data-key="2026-06-19:AM" data-subj="WERK" data-kind="serie">
+          <span class="slot__check" aria-hidden="true"></span>
+          <span class="slot__body">
+            <span class="slot__top"><span class="slot__when">Vormittag</span><span class="slot__subj">Werkstoffe</span></span>
+            <span class="slot__task">Serie 3–4</span>
+          </span>
+        </label>
+        <label class="slot slot--study" style="--c:#1E8BA8">
+          <input type="checkbox" data-key="2026-06-19:PM" data-subj="FLF" data-kind="serie">
+          <span class="slot__check" aria-hidden="true"></span>
+          <span class="slot__body">
+            <span class="slot__top"><span class="slot__when">Nachmittag</span><span class="slot__subj">Fluid Fund.</span></span>
+            <span class="slot__task">Serie 3–4</span>
+          </span>
+        </label></div>
+      </div>
+      <div class="day day--we" data-date="2026-06-20">
+        <div class="day__date"><span class="day__num mono">20</span><span class="day__wd">Sa</span></div>
+        <div class="day__slots"><div class="slot slot--soft slot--weekend">
+          <span class="slot__body"><span class="slot__task slot__task--soft">Wochenende &middot; frei / Puffer für Überhang</span></span>
+        </div></div>
+      </div>
+      <div class="day day--we" data-date="2026-06-21">
+        <div class="day__date"><span class="day__num mono">21</span><span class="day__wd">So</span></div>
+        <div class="day__slots"><div class="slot slot--soft slot--weekend">
+          <span class="slot__body"><span class="slot__task slot__task--soft">Wochenende &middot; frei / Puffer für Überhang</span></span>
+        </div></div>
+      </div></div>
+    </section>
+    <section class="week">
+      <h2 class="week__title"><span class="mono">KW 26</span><span class="week__range">22. Juni – 28. Juni</span></h2>
+      <div class="week__days">
+      <div class="day" data-date="2026-06-22">
+        <div class="day__date"><span class="day__num mono">22</span><span class="day__wd">Mo</span></div>
+        <div class="day__slots">
+        <div class="slot slot--soft">
+          <span class="slot__body"><span class="slot__top"><span class="slot__when">Vormittag</span></span>
+          <span class="slot__task slot__task--soft">DVK</span></span>
+        </div>
+        <div class="slot slot--soft">
+          <span class="slot__body"><span class="slot__top"><span class="slot__when">Nachmittag</span></span>
+          <span class="slot__task slot__task--soft">DVK</span></span>
+        </div></div>
+      </div>
+      <div class="day" data-date="2026-06-23">
+        <div class="day__date"><span class="day__num mono">23</span><span class="day__wd">Di</span></div>
+        <div class="day__slots">
+        <div class="slot slot--soft">
+          <span class="slot__body"><span class="slot__top"><span class="slot__when">Vormittag</span></span>
+          <span class="slot__task slot__task--soft">DVK</span></span>
+        </div>
+        <div class="slot slot--soft">
+          <span class="slot__body"><span class="slot__top"><span class="slot__when">Nachmittag</span></span>
+          <span class="slot__task slot__task--soft">DVK</span></span>
+        </div></div>
+      </div>
+      <div class="day" data-date="2026-06-24">
+        <div class="day__date"><span class="day__num mono">24</span><span class="day__wd">Mi</span></div>
+        <div class="day__slots">
+        <div class="slot slot--soft">
+          <span class="slot__body"><span class="slot__top"><span class="slot__when">Vormittag</span></span>
+          <span class="slot__task slot__task--soft">DVK</span></span>
+        </div>
+        <div class="slot slot--soft">
+          <span class="slot__body"><span class="slot__top"><span class="slot__when">Nachmittag</span></span>
+          <span class="slot__task slot__task--soft">DVK</span></span>
+        </div></div>
+      </div>
+      <div class="day" data-date="2026-06-25">
+        <div class="day__date"><span class="day__num mono">25</span><span class="day__wd">Do</span></div>
+        <div class="day__slots">
+        <label class="slot slot--study" style="--c:#D97A2B">
+          <input type="checkbox" data-key="2026-06-25:AM" data-subj="THE3" data-kind="serie">
+          <span class="slot__check" aria-hidden="true"></span>
+          <span class="slot__body">
+            <span class="slot__top"><span class="slot__when">Vormittag</span><span class="slot__subj">Thermo III</span></span>
+            <span class="slot__task">Serie 3–4</span>
+          </span>
+        </label>
+        <label class="slot slot--study" style="--c:#3E8E5A">
+          <input type="checkbox" data-key="2026-06-25:PM" data-subj="CTRL" data-kind="serie">
+          <span class="slot__check" aria-hidden="true"></span>
+          <span class="slot__body">
+            <span class="slot__top"><span class="slot__when">Nachmittag</span><span class="slot__subj">Control II</span></span>
+            <span class="slot__task">Serie 3–4</span>
+          </span>
+        </label></div>
+      </div>
+      <div class="day" data-date="2026-06-26">
+        <div class="day__date"><span class="day__num mono">26</span><span class="day__wd">Fr</span></div>
+        <div class="day__slots">
+        <label class="slot slot--study" style="--c:#138086">
+          <input type="checkbox" data-key="2026-06-26:AM" data-subj="FLA" data-kind="serie">
+          <span class="slot__check" aria-hidden="true"></span>
+          <span class="slot__body">
+            <span class="slot__top"><span class="slot__when">Vormittag</span><span class="slot__subj">Fluid Adv.</span></span>
+            <span class="slot__task">Serie 3–4</span>
+          </span>
+        </label>
+        <label class="slot slot--study" style="--c:#C0492B">
+          <input type="checkbox" data-key="2026-06-26:PM" data-subj="THE2" data-kind="serie">
+          <span class="slot__check" aria-hidden="true"></span>
+          <span class="slot__body">
+            <span class="slot__top"><span class="slot__when">Nachmittag</span><span class="slot__subj">Thermo II</span></span>
+            <span class="slot__task">Serie 5–6</span>
+          </span>
+        </label></div>
+      </div>
+      <div class="day day--we" data-date="2026-06-27">
+        <div class="day__date"><span class="day__num mono">27</span><span class="day__wd">Sa</span></div>
+        <div class="day__slots"><div class="slot slot--soft slot--weekend">
+          <span class="slot__body"><span class="slot__task slot__task--soft">Wochenende &middot; frei / Puffer für Überhang</span></span>
+        </div></div>
+      </div>
+      <div class="day day--we" data-date="2026-06-28">
+        <div class="day__date"><span class="day__num mono">28</span><span class="day__wd">So</span></div>
+        <div class="day__slots"><div class="slot slot--soft slot--weekend">
+          <span class="slot__body"><span class="slot__task slot__task--soft">Wochenende &middot; frei / Puffer für Überhang</span></span>
+        </div></div>
+      </div></div>
+    </section>
+    <section class="week">
+      <h2 class="week__title"><span class="mono">KW 27</span><span class="week__range">29. Juni – 5. Juli</span></h2>
+      <div class="week__days">
+      <div class="day" data-date="2026-06-29">
+        <div class="day__date"><span class="day__num mono">29</span><span class="day__wd">Mo</span></div>
+        <div class="day__slots">
+        <label class="slot slot--study" style="--c:#6D4AA8">
+          <input type="checkbox" data-key="2026-06-29:AM" data-subj="QM" data-kind="serie">
+          <span class="slot__check" aria-hidden="true"></span>
+          <span class="slot__body">
+            <span class="slot__top"><span class="slot__when">Vormittag</span><span class="slot__subj">Quantum</span></span>
+            <span class="slot__task">Serie 5–6</span>
+          </span>
+        </label>
+        <label class="slot slot--study" style="--c:#2563B0">
+          <input type="checkbox" data-key="2026-06-29:PM" data-subj="STOCH" data-kind="serie">
+          <span class="slot__check" aria-hidden="true"></span>
+          <span class="slot__body">
+            <span class="slot__top"><span class="slot__when">Nachmittag</span><span class="slot__subj">Stochastics</span></span>
+            <span class="slot__task">Serie 5–6</span>
+          </span>
+        </label></div>
+      </div>
+      <div class="day" data-date="2026-06-30">
+        <div class="day__date"><span class="day__num mono">30</span><span class="day__wd">Di</span></div>
+        <div class="day__slots">
+        <label class="slot slot--study" style="--c:#8A6D3B">
+          <input type="checkbox" data-key="2026-06-30:AM" data-subj="WERK" data-kind="serie">
+          <span class="slot__check" aria-hidden="true"></span>
+          <span class="slot__body">
+            <span class="slot__top"><span class="slot__when">Vormittag</span><span class="slot__subj">Werkstoffe</span></span>
+            <span class="slot__task">Serie 5–6</span>
+          </span>
+        </label>
+        <label class="slot slot--study" style="--c:#1E8BA8">
+          <input type="checkbox" data-key="2026-06-30:PM" data-subj="FLF" data-kind="serie">
+          <span class="slot__check" aria-hidden="true"></span>
+          <span class="slot__body">
+            <span class="slot__top"><span class="slot__when">Nachmittag</span><span class="slot__subj">Fluid Fund.</span></span>
+            <span class="slot__task">Serie 5–6</span>
+          </span>
+        </label></div>
+      </div>
+      <div class="day" data-date="2026-07-01">
+        <div class="day__date"><span class="day__num mono">1</span><span class="day__wd">Mi</span></div>
+        <div class="day__slots">
+        <label class="slot slot--study" style="--c:#D97A2B">
+          <input type="checkbox" data-key="2026-07-01:AM" data-subj="THE3" data-kind="serie">
+          <span class="slot__check" aria-hidden="true"></span>
+          <span class="slot__body">
+            <span class="slot__top"><span class="slot__when">Vormittag</span><span class="slot__subj">Thermo III</span></span>
+            <span class="slot__task">Serie 5–6</span>
+          </span>
+        </label>
+        <label class="slot slot--study" style="--c:#3E8E5A">
+          <input type="checkbox" data-key="2026-07-01:PM" data-subj="CTRL" data-kind="serie">
+          <span class="slot__check" aria-hidden="true"></span>
+          <span class="slot__body">
+            <span class="slot__top"><span class="slot__when">Nachmittag</span><span class="slot__subj">Control II</span></span>
+            <span class="slot__task">Serie 5–6</span>
+          </span>
+        </label></div>
+      </div>
+      <div class="day" data-date="2026-07-02">
+        <div class="day__date"><span class="day__num mono">2</span><span class="day__wd">Do</span></div>
+        <div class="day__slots">
+        <label class="slot slot--study" style="--c:#138086">
+          <input type="checkbox" data-key="2026-07-02:AM" data-subj="FLA" data-kind="serie">
+          <span class="slot__check" aria-hidden="true"></span>
+          <span class="slot__body">
+            <span class="slot__top"><span class="slot__when">Vormittag</span><span class="slot__subj">Fluid Adv.</span></span>
+            <span class="slot__task">Serie 5–6</span>
+          </span>
+        </label>
+        <label class="slot slot--study" style="--c:#C0492B">
+          <input type="checkbox" data-key="2026-07-02:PM" data-subj="THE2" data-kind="serie">
+          <span class="slot__check" aria-hidden="true"></span>
+          <span class="slot__body">
+            <span class="slot__top"><span class="slot__when">Nachmittag</span><span class="slot__subj">Thermo II</span></span>
+            <span class="slot__task">Serie 7–8</span>
+          </span>
+        </label></div>
+      </div>
+      <div class="day" data-date="2026-07-03">
+        <div class="day__date"><span class="day__num mono">3</span><span class="day__wd">Fr</span></div>
+        <div class="day__slots">
+        <label class="slot slot--study" style="--c:#6D4AA8">
+          <input type="checkbox" data-key="2026-07-03:AM" data-subj="QM" data-kind="serie">
+          <span class="slot__check" aria-hidden="true"></span>
+          <span class="slot__body">
+            <span class="slot__top"><span class="slot__when">Vormittag</span><span class="slot__subj">Quantum</span></span>
+            <span class="slot__task">Serie 7–8</span>
+          </span>
+        </label>
+        <label class="slot slot--study" style="--c:#2563B0">
+          <input type="checkbox" data-key="2026-07-03:PM" data-subj="STOCH" data-kind="serie">
+          <span class="slot__check" aria-hidden="true"></span>
+          <span class="slot__body">
+            <span class="slot__top"><span class="slot__when">Nachmittag</span><span class="slot__subj">Stochastics</span></span>
+            <span class="slot__task">Serie 7–8</span>
+          </span>
+        </label></div>
+      </div>
+      <div class="day day--we" data-date="2026-07-04">
+        <div class="day__date"><span class="day__num mono">4</span><span class="day__wd">Sa</span></div>
+        <div class="day__slots"><div class="slot slot--soft slot--weekend">
+          <span class="slot__body"><span class="slot__task slot__task--soft">Wochenende &middot; frei / Puffer für Überhang</span></span>
+        </div></div>
+      </div>
+      <div class="day day--we" data-date="2026-07-05">
+        <div class="day__date"><span class="day__num mono">5</span><span class="day__wd">So</span></div>
+        <div class="day__slots"><div class="slot slot--soft slot--weekend">
+          <span class="slot__body"><span class="slot__task slot__task--soft">Wochenende &middot; frei / Puffer für Überhang</span></span>
+        </div></div>
+      </div></div>
+    </section>
+    <section class="week">
+      <h2 class="week__title"><span class="mono">KW 28</span><span class="week__range">6. Juli – 12. Juli</span></h2>
+      <div class="week__days">
+      <div class="day" data-date="2026-07-06">
+        <div class="day__date"><span class="day__num mono">6</span><span class="day__wd">Mo</span></div>
+        <div class="day__slots">
+        <label class="slot slot--study" style="--c:#8A6D3B">
+          <input type="checkbox" data-key="2026-07-06:AM" data-subj="WERK" data-kind="serie">
+          <span class="slot__check" aria-hidden="true"></span>
+          <span class="slot__body">
+            <span class="slot__top"><span class="slot__when">Vormittag</span><span class="slot__subj">Werkstoffe</span></span>
+            <span class="slot__task">Serie 7–8</span>
+          </span>
+        </label>
+        <label class="slot slot--study" style="--c:#D97A2B">
+          <input type="checkbox" data-key="2026-07-06:PM" data-subj="THE3" data-kind="serie">
+          <span class="slot__check" aria-hidden="true"></span>
+          <span class="slot__body">
+            <span class="slot__top"><span class="slot__when">Nachmittag</span><span class="slot__subj">Thermo III</span></span>
+            <span class="slot__task">Serie 7–8</span>
+          </span>
+        </label></div>
+      </div>
+      <div class="day" data-date="2026-07-07">
+        <div class="day__date"><span class="day__num mono">7</span><span class="day__wd">Di</span></div>
+        <div class="day__slots">
+        <label class="slot slot--study" style="--c:#3E8E5A">
+          <input type="checkbox" data-key="2026-07-07:AM" data-subj="CTRL" data-kind="serie">
+          <span class="slot__check" aria-hidden="true"></span>
+          <span class="slot__body">
+            <span class="slot__top"><span class="slot__when">Vormittag</span><span class="slot__subj">Control II</span></span>
+            <span class="slot__task">Serie 7–8</span>
+          </span>
+        </label>
+        <label class="slot slot--study" style="--c:#C0492B">
+          <input type="checkbox" data-key="2026-07-07:PM" data-subj="THE2" data-kind="serie">
+          <span class="slot__check" aria-hidden="true"></span>
+          <span class="slot__body">
+            <span class="slot__top"><span class="slot__when">Nachmittag</span><span class="slot__subj">Thermo II</span></span>
+            <span class="slot__task">Serie 9–10</span>
+          </span>
+        </label></div>
+      </div>
+      <div class="day" data-date="2026-07-08">
+        <div class="day__date"><span class="day__num mono">8</span><span class="day__wd">Mi</span></div>
+        <div class="day__slots">
+        <label class="slot slot--study" style="--c:#6D4AA8">
+          <input type="checkbox" data-key="2026-07-08:AM" data-subj="QM" data-kind="serie">
+          <span class="slot__check" aria-hidden="true"></span>
+          <span class="slot__body">
+            <span class="slot__top"><span class="slot__when">Vormittag</span><span class="slot__subj">Quantum</span></span>
+            <span class="slot__task">Serie 9–10</span>
+          </span>
+        </label>
+        <label class="slot slot--study" style="--c:#2563B0">
+          <input type="checkbox" data-key="2026-07-08:PM" data-subj="STOCH" data-kind="serie">
+          <span class="slot__check" aria-hidden="true"></span>
+          <span class="slot__body">
+            <span class="slot__top"><span class="slot__when">Nachmittag</span><span class="slot__subj">Stochastics</span></span>
+            <span class="slot__task">Serie 9–10</span>
+          </span>
+        </label></div>
+      </div>
+      <div class="day" data-date="2026-07-09">
+        <div class="day__date"><span class="day__num mono">9</span><span class="day__wd">Do</span></div>
+        <div class="day__slots">
+        <label class="slot slot--study" style="--c:#8A6D3B">
+          <input type="checkbox" data-key="2026-07-09:AM" data-subj="WERK" data-kind="serie">
+          <span class="slot__check" aria-hidden="true"></span>
+          <span class="slot__body">
+            <span class="slot__top"><span class="slot__when">Vormittag</span><span class="slot__subj">Werkstoffe</span></span>
+            <span class="slot__task">Serie 9–10</span>
+          </span>
+        </label>
+        <label class="slot slot--study" style="--c:#D97A2B">
+          <input type="checkbox" data-key="2026-07-09:PM" data-subj="THE3" data-kind="serie">
+          <span class="slot__check" aria-hidden="true"></span>
+          <span class="slot__body">
+            <span class="slot__top"><span class="slot__when">Nachmittag</span><span class="slot__subj">Thermo III</span></span>
+            <span class="slot__task">Serie 9–10</span>
+          </span>
+        </label></div>
+      </div>
+      <div class="day" data-date="2026-07-10">
+        <div class="day__date"><span class="day__num mono">10</span><span class="day__wd">Fr</span></div>
+        <div class="day__slots">
+        <label class="slot slot--study" style="--c:#3E8E5A">
+          <input type="checkbox" data-key="2026-07-10:AM" data-subj="CTRL" data-kind="serie">
+          <span class="slot__check" aria-hidden="true"></span>
+          <span class="slot__body">
+            <span class="slot__top"><span class="slot__when">Vormittag</span><span class="slot__subj">Control II</span></span>
+            <span class="slot__task">Serie 9–10</span>
+          </span>
+        </label>
+        <label class="slot slot--study" style="--c:#C0492B">
+          <input type="checkbox" data-key="2026-07-10:PM" data-subj="THE2" data-kind="serie">
+          <span class="slot__check" aria-hidden="true"></span>
+          <span class="slot__body">
+            <span class="slot__top"><span class="slot__when">Nachmittag</span><span class="slot__subj">Thermo II</span></span>
+            <span class="slot__task">Serie 11</span>
+          </span>
+        </label></div>
+      </div>
+      <div class="day day--we" data-date="2026-07-11">
+        <div class="day__date"><span class="day__num mono">11</span><span class="day__wd">Sa</span></div>
+        <div class="day__slots"><div class="slot slot--soft slot--weekend">
+          <span class="slot__body"><span class="slot__task slot__task--soft">Wochenende &middot; frei / Puffer für Überhang</span></span>
+        </div></div>
+      </div>
+      <div class="day day--we" data-date="2026-07-12">
+        <div class="day__date"><span class="day__num mono">12</span><span class="day__wd">So</span></div>
+        <div class="day__slots"><div class="slot slot--soft slot--weekend">
+          <span class="slot__body"><span class="slot__task slot__task--soft">Wochenende &middot; frei / Puffer für Überhang</span></span>
+        </div></div>
+      </div></div>
+    </section>
+    <section class="week">
+      <h2 class="week__title"><span class="mono">KW 29</span><span class="week__range">13. Juli – 19. Juli</span></h2>
+      <div class="week__days">
+      <div class="day" data-date="2026-07-13">
+        <div class="day__date"><span class="day__num mono">13</span><span class="day__wd">Mo</span></div>
+        <div class="day__slots">
+        <label class="slot slot--study" style="--c:#6D4AA8">
+          <input type="checkbox" data-key="2026-07-13:AM" data-subj="QM" data-kind="serie">
+          <span class="slot__check" aria-hidden="true"></span>
+          <span class="slot__body">
+            <span class="slot__top"><span class="slot__when">Vormittag</span><span class="slot__subj">Quantum</span></span>
+            <span class="slot__task">Serie 11–12</span>
+          </span>
+        </label>
+        <label class="slot slot--study" style="--c:#2563B0">
+          <input type="checkbox" data-key="2026-07-13:PM" data-subj="STOCH" data-kind="serie">
+          <span class="slot__check" aria-hidden="true"></span>
+          <span class="slot__body">
+            <span class="slot__top"><span class="slot__when">Nachmittag</span><span class="slot__subj">Stochastics</span></span>
+            <span class="slot__task">Serie 11–12</span>
+          </span>
+        </label></div>
+      </div>
+      <div class="day" data-date="2026-07-14">
+        <div class="day__date"><span class="day__num mono">14</span><span class="day__wd">Di</span></div>
+        <div class="day__slots">
+        <label class="slot slot--study" style="--c:#8A6D3B">
+          <input type="checkbox" data-key="2026-07-14:AM" data-subj="WERK" data-kind="serie">
+          <span class="slot__check" aria-hidden="true"></span>
+          <span class="slot__body">
+            <span class="slot__top"><span class="slot__when">Vormittag</span><span class="slot__subj">Werkstoffe</span></span>
+            <span class="slot__task">Serie 11–12</span>
+          </span>
+        </label>
+        <label class="slot slot--study" style="--c:#D97A2B">
+          <input type="checkbox" data-key="2026-07-14:PM" data-subj="THE3" data-kind="serie">
+          <span class="slot__check" aria-hidden="true"></span>
+          <span class="slot__body">
+            <span class="slot__top"><span class="slot__when">Nachmittag</span><span class="slot__subj">Thermo III</span></span>
+            <span class="slot__task">Serie 11–12</span>
+          </span>
+        </label></div>
+      </div>
+      <div class="day" data-date="2026-07-15">
+        <div class="day__date"><span class="day__num mono">15</span><span class="day__wd">Mi</span></div>
+        <div class="day__slots">
+        <label class="slot slot--study" style="--c:#3E8E5A">
+          <input type="checkbox" data-key="2026-07-15:AM" data-subj="CTRL" data-kind="serie">
+          <span class="slot__check" aria-hidden="true"></span>
+          <span class="slot__body">
+            <span class="slot__top"><span class="slot__when">Vormittag</span><span class="slot__subj">Control II</span></span>
+            <span class="slot__task">Serie 11–12</span>
+          </span>
+        </label>
+        <label class="slot slot--study" style="--c:#C0492B">
+          <input type="checkbox" data-key="2026-07-15:PM" data-subj="THE2" data-kind="serie">
+          <span class="slot__check" aria-hidden="true"></span>
+          <span class="slot__body">
+            <span class="slot__top"><span class="slot__when">Nachmittag</span><span class="slot__subj">Thermo II</span></span>
+            <span class="slot__task">Aufgabensammlung Teil 2 (1/2)</span>
+          </span>
+        </label></div>
+      </div>
+      <div class="day" data-date="2026-07-16">
+        <div class="day__date"><span class="day__num mono">16</span><span class="day__wd">Do</span></div>
+        <div class="day__slots">
+        <label class="slot slot--study" style="--c:#2563B0">
+          <input type="checkbox" data-key="2026-07-16:AM" data-subj="STOCH" data-kind="serie">
+          <span class="slot__check" aria-hidden="true"></span>
+          <span class="slot__body">
+            <span class="slot__top"><span class="slot__when">Vormittag</span><span class="slot__subj">Stochastics</span></span>
+            <span class="slot__task">Serie 13–14</span>
+          </span>
+        </label>
+        <label class="slot slot--study" style="--c:#D97A2B">
+          <input type="checkbox" data-key="2026-07-16:PM" data-subj="THE3" data-kind="serie">
+          <span class="slot__check" aria-hidden="true"></span>
+          <span class="slot__body">
+            <span class="slot__top"><span class="slot__when">Nachmittag</span><span class="slot__subj">Thermo III</span></span>
+            <span class="slot__task">Serie 13</span>
+          </span>
+        </label></div>
+      </div>
+      <div class="day" data-date="2026-07-17">
+        <div class="day__date"><span class="day__num mono">17</span><span class="day__wd">Fr</span></div>
+        <div class="day__slots">
+        <label class="slot slot--study" style="--c:#3E8E5A">
+          <input type="checkbox" data-key="2026-07-17:AM" data-subj="CTRL" data-kind="serie">
+          <span class="slot__check" aria-hidden="true"></span>
+          <span class="slot__body">
+            <span class="slot__top"><span class="slot__when">Vormittag</span><span class="slot__subj">Control II</span></span>
+            <span class="slot__task">Serie 13</span>
+          </span>
+        </label>
+        <label class="slot slot--study" style="--c:#C0492B">
+          <input type="checkbox" data-key="2026-07-17:PM" data-subj="THE2" data-kind="serie">
+          <span class="slot__check" aria-hidden="true"></span>
+          <span class="slot__body">
+            <span class="slot__top"><span class="slot__when">Nachmittag</span><span class="slot__subj">Thermo II</span></span>
+            <span class="slot__task">Aufgabensammlung Teil 2 (2/2)</span>
+          </span>
+        </label></div>
+      </div>
+      <div class="day day--we" data-date="2026-07-18">
+        <div class="day__date"><span class="day__num mono">18</span><span class="day__wd">Sa</span></div>
+        <div class="day__slots"><div class="slot slot--soft slot--weekend">
+          <span class="slot__body"><span class="slot__task slot__task--soft">Wochenende &middot; frei / Puffer für Überhang</span></span>
+        </div></div>
+      </div>
+      <div class="day day--we" data-date="2026-07-19">
+        <div class="day__date"><span class="day__num mono">19</span><span class="day__wd">So</span></div>
+        <div class="day__slots"><div class="slot slot--soft slot--weekend">
+          <span class="slot__body"><span class="slot__task slot__task--soft">Wochenende &middot; frei / Puffer für Überhang</span></span>
+        </div></div>
+      </div></div>
+    </section>
+    <section class="week">
+      <h2 class="week__title"><span class="mono">KW 30</span><span class="week__range">20. Juli – 26. Juli</span></h2>
+      <div class="week__days">
+      <div class="day" data-date="2026-07-20">
+        <div class="day__date"><span class="day__num mono">20</span><span class="day__wd">Mo</span></div>
+        <div class="day__slots">
+        <label class="slot slot--study" style="--c:#C0492B">
+          <input type="checkbox" data-key="2026-07-20:AM" data-subj="THE2" data-kind="altpr">
+          <span class="slot__check" aria-hidden="true"></span>
+          <span class="slot__body">
+            <span class="slot__top"><span class="slot__when">Vormittag</span><span class="slot__subj">Thermo II</span></span>
+            <span class="slot__task">Altprüfung 1</span>
+          </span>
+        </label>
+        <label class="slot slot--study" style="--c:#6D4AA8">
+          <input type="checkbox" data-key="2026-07-20:PM" data-subj="QM" data-kind="altpr">
+          <span class="slot__check" aria-hidden="true"></span>
+          <span class="slot__body">
+            <span class="slot__top"><span class="slot__when">Nachmittag</span><span class="slot__subj">Quantum</span></span>
+            <span class="slot__task">Altprüfung 1</span>
+          </span>
+        </label></div>
+      </div>
+      <div class="day" data-date="2026-07-21">
+        <div class="day__date"><span class="day__num mono">21</span><span class="day__wd">Di</span></div>
+        <div class="day__slots">
+        <label class="slot slot--study" style="--c:#2563B0">
+          <input type="checkbox" data-key="2026-07-21:AM" data-subj="STOCH" data-kind="altpr">
+          <span class="slot__check" aria-hidden="true"></span>
+          <span class="slot__body">
+            <span class="slot__top"><span class="slot__when">Vormittag</span><span class="slot__subj">Stochastics</span></span>
+            <span class="slot__task">Altprüfung 1</span>
+          </span>
+        </label>
+        <label class="slot slot--study" style="--c:#8A6D3B">
+          <input type="checkbox" data-key="2026-07-21:PM" data-subj="WERK" data-kind="altpr">
+          <span class="slot__check" aria-hidden="true"></span>
+          <span class="slot__body">
+            <span class="slot__top"><span class="slot__when">Nachmittag</span><span class="slot__subj">Werkstoffe</span></span>
+            <span class="slot__task">Probeprüfung</span>
+          </span>
+        </label></div>
+      </div>
+      <div class="day" data-date="2026-07-22">
+        <div class="day__date"><span class="day__num mono">22</span><span class="day__wd">Mi</span></div>
+        <div class="day__slots">
+        <label class="slot slot--study" style="--c:#1E8BA8">
+          <input type="checkbox" data-key="2026-07-22:AM" data-subj="FLF" data-kind="altpr">
+          <span class="slot__check" aria-hidden="true"></span>
+          <span class="slot__body">
+            <span class="slot__top"><span class="slot__when">Vormittag</span><span class="slot__subj">Fluid Fund.</span></span>
+            <span class="slot__task">Altprüfung 1</span>
+          </span>
+        </label>
+        <label class="slot slot--study" style="--c:#D97A2B">
+          <input type="checkbox" data-key="2026-07-22:PM" data-subj="THE3" data-kind="altpr">
+          <span class="slot__check" aria-hidden="true"></span>
+          <span class="slot__body">
+            <span class="slot__top"><span class="slot__when">Nachmittag</span><span class="slot__subj">Thermo III</span></span>
+            <span class="slot__task">Altprüfung (normal)</span>
+          </span>
+        </label></div>
+      </div>
+      <div class="day" data-date="2026-07-23">
+        <div class="day__date"><span class="day__num mono">23</span><span class="day__wd">Do</span></div>
+        <div class="day__slots">
+        <label class="slot slot--study" style="--c:#3E8E5A">
+          <input type="checkbox" data-key="2026-07-23:AM" data-subj="CTRL" data-kind="altpr">
+          <span class="slot__check" aria-hidden="true"></span>
+          <span class="slot__body">
+            <span class="slot__top"><span class="slot__when">Vormittag</span><span class="slot__subj">Control II</span></span>
+            <span class="slot__task">Altprüfung 1</span>
+          </span>
+        </label>
+        <label class="slot slot--study" style="--c:#138086">
+          <input type="checkbox" data-key="2026-07-23:PM" data-subj="FLA" data-kind="altpr">
+          <span class="slot__check" aria-hidden="true"></span>
+          <span class="slot__body">
+            <span class="slot__top"><span class="slot__when">Nachmittag</span><span class="slot__subj">Fluid Adv.</span></span>
+            <span class="slot__task">Altprüfung 1</span>
+          </span>
+        </label></div>
+      </div>
+      <div class="day" data-date="2026-07-24">
+        <div class="day__date"><span class="day__num mono">24</span><span class="day__wd">Fr</span></div>
+        <div class="day__slots">
+        <label class="slot slot--study" style="--c:#C0492B">
+          <input type="checkbox" data-key="2026-07-24:AM" data-subj="THE2" data-kind="altpr">
+          <span class="slot__check" aria-hidden="true"></span>
+          <span class="slot__body">
+            <span class="slot__top"><span class="slot__when">Vormittag</span><span class="slot__subj">Thermo II</span></span>
+            <span class="slot__task">Altprüfung 2</span>
+          </span>
+        </label>
+        <label class="slot slot--study" style="--c:#6D4AA8">
+          <input type="checkbox" data-key="2026-07-24:PM" data-subj="QM" data-kind="altpr">
+          <span class="slot__check" aria-hidden="true"></span>
+          <span class="slot__body">
+            <span class="slot__top"><span class="slot__when">Nachmittag</span><span class="slot__subj">Quantum</span></span>
+            <span class="slot__task">Altprüfung 2</span>
+          </span>
+        </label></div>
+      </div>
+      <div class="day day--we" data-date="2026-07-25">
+        <div class="day__date"><span class="day__num mono">25</span><span class="day__wd">Sa</span></div>
+        <div class="day__slots"><div class="slot slot--soft slot--weekend">
+          <span class="slot__body"><span class="slot__task slot__task--soft">Wochenende &middot; frei / Puffer für Überhang</span></span>
+        </div></div>
+      </div>
+      <div class="day day--we" data-date="2026-07-26">
+        <div class="day__date"><span class="day__num mono">26</span><span class="day__wd">So</span></div>
+        <div class="day__slots"><div class="slot slot--soft slot--weekend">
+          <span class="slot__body"><span class="slot__task slot__task--soft">Wochenende &middot; frei / Puffer für Überhang</span></span>
+        </div></div>
+      </div></div>
+    </section>
+    <section class="week">
+      <h2 class="week__title"><span class="mono">KW 31</span><span class="week__range">27. Juli – 2. August</span></h2>
+      <div class="week__days">
+      <div class="day" data-date="2026-07-27">
+        <div class="day__date"><span class="day__num mono">27</span><span class="day__wd">Mo</span></div>
+        <div class="day__slots">
+        <label class="slot slot--study" style="--c:#2563B0">
+          <input type="checkbox" data-key="2026-07-27:AM" data-subj="STOCH" data-kind="altpr">
+          <span class="slot__check" aria-hidden="true"></span>
+          <span class="slot__body">
+            <span class="slot__top"><span class="slot__when">Vormittag</span><span class="slot__subj">Stochastics</span></span>
+            <span class="slot__task">Altprüfung 2</span>
+          </span>
+        </label>
+        <label class="slot slot--study" style="--c:#1E8BA8">
+          <input type="checkbox" data-key="2026-07-27:PM" data-subj="FLF" data-kind="altpr">
+          <span class="slot__check" aria-hidden="true"></span>
+          <span class="slot__body">
+            <span class="slot__top"><span class="slot__when">Nachmittag</span><span class="slot__subj">Fluid Fund.</span></span>
+            <span class="slot__task">Altprüfung 2</span>
+          </span>
+        </label></div>
+      </div>
+      <div class="day" data-date="2026-07-28">
+        <div class="day__date"><span class="day__num mono">28</span><span class="day__wd">Di</span></div>
+        <div class="day__slots">
+        <label class="slot slot--study" style="--c:#D97A2B">
+          <input type="checkbox" data-key="2026-07-28:AM" data-subj="THE3" data-kind="altpr">
+          <span class="slot__check" aria-hidden="true"></span>
+          <span class="slot__body">
+            <span class="slot__top"><span class="slot__when">Vormittag</span><span class="slot__subj">Thermo III</span></span>
+            <span class="slot__task">Mock: C&C #1 + HE&R #1</span>
+          </span>
+        </label>
+        <label class="slot slot--study" style="--c:#3E8E5A">
+          <input type="checkbox" data-key="2026-07-28:PM" data-subj="CTRL" data-kind="altpr">
+          <span class="slot__check" aria-hidden="true"></span>
+          <span class="slot__body">
+            <span class="slot__top"><span class="slot__when">Nachmittag</span><span class="slot__subj">Control II</span></span>
+            <span class="slot__task">Altprüfung 2</span>
+          </span>
+        </label></div>
+      </div>
+      <div class="day" data-date="2026-07-29">
+        <div class="day__date"><span class="day__num mono">29</span><span class="day__wd">Mi</span></div>
+        <div class="day__slots">
+        <label class="slot slot--study" style="--c:#138086">
+          <input type="checkbox" data-key="2026-07-29:AM" data-subj="FLA" data-kind="altpr">
+          <span class="slot__check" aria-hidden="true"></span>
+          <span class="slot__body">
+            <span class="slot__top"><span class="slot__when">Vormittag</span><span class="slot__subj">Fluid Adv.</span></span>
+            <span class="slot__task">Altprüfung 2</span>
+          </span>
+        </label>
+        <label class="slot slot--study" style="--c:#C0492B">
+          <input type="checkbox" data-key="2026-07-29:PM" data-subj="THE2" data-kind="altpr">
+          <span class="slot__check" aria-hidden="true"></span>
+          <span class="slot__body">
+            <span class="slot__top"><span class="slot__when">Nachmittag</span><span class="slot__subj">Thermo II</span></span>
+            <span class="slot__task">Altprüfung 3</span>
+          </span>
+        </label></div>
+      </div>
+      <div class="day" data-date="2026-07-30">
+        <div class="day__date"><span class="day__num mono">30</span><span class="day__wd">Do</span></div>
+        <div class="day__slots">
+        <label class="slot slot--study" style="--c:#6D4AA8">
+          <input type="checkbox" data-key="2026-07-30:AM" data-subj="QM" data-kind="altpr">
+          <span class="slot__check" aria-hidden="true"></span>
+          <span class="slot__body">
+            <span class="slot__top"><span class="slot__when">Vormittag</span><span class="slot__subj">Quantum</span></span>
+            <span class="slot__task">Altprüfung 3</span>
+          </span>
+        </label>
+        <label class="slot slot--study" style="--c:#2563B0">
+          <input type="checkbox" data-key="2026-07-30:PM" data-subj="STOCH" data-kind="altpr">
+          <span class="slot__check" aria-hidden="true"></span>
+          <span class="slot__body">
+            <span class="slot__top"><span class="slot__when">Nachmittag</span><span class="slot__subj">Stochastics</span></span>
+            <span class="slot__task">Altprüfung 3</span>
+          </span>
+        </label></div>
+      </div>
+      <div class="day" data-date="2026-07-31">
+        <div class="day__date"><span class="day__num mono">31</span><span class="day__wd">Fr</span></div>
+        <div class="day__slots">
+        <label class="slot slot--study" style="--c:#1E8BA8">
+          <input type="checkbox" data-key="2026-07-31:AM" data-subj="FLF" data-kind="altpr">
+          <span class="slot__check" aria-hidden="true"></span>
+          <span class="slot__body">
+            <span class="slot__top"><span class="slot__when">Vormittag</span><span class="slot__subj">Fluid Fund.</span></span>
+            <span class="slot__task">Altprüfung 3</span>
+          </span>
+        </label>
+        <label class="slot slot--study" style="--c:#3E8E5A">
+          <input type="checkbox" data-key="2026-07-31:PM" data-subj="CTRL" data-kind="altpr">
+          <span class="slot__check" aria-hidden="true"></span>
+          <span class="slot__body">
+            <span class="slot__top"><span class="slot__when">Nachmittag</span><span class="slot__subj">Control II</span></span>
+            <span class="slot__task">Altprüfung 3</span>
+          </span>
+        </label></div>
+      </div>
+      <div class="day day--we" data-date="2026-08-01">
+        <div class="day__date"><span class="day__num mono">1</span><span class="day__wd">Sa</span></div>
+        <div class="day__slots"><div class="slot slot--soft slot--weekend">
+          <span class="slot__body"><span class="slot__task slot__task--soft">Wochenende &middot; frei / Puffer für Überhang</span></span>
+        </div></div>
+      </div>
+      <div class="day day--we" data-date="2026-08-02">
+        <div class="day__date"><span class="day__num mono">2</span><span class="day__wd">So</span></div>
+        <div class="day__slots">
+        <label class="slot slot--study slot--vt" style="--c:#C0492B">
+          <input type="checkbox" data-key="2026-08-02:AM" data-subj="THE2" data-kind="altpr">
+          <span class="slot__check" aria-hidden="true"></span>
+          <span class="slot__body">
+            <span class="slot__top"><span class="slot__when">Vormittag</span><span class="slot__subj">Thermo II</span><span class="badge badge--vt">Vortag</span></span>
+            <span class="slot__task">Altprüfung 4</span>
+          </span>
+        </label>
+        <label class="slot slot--study slot--vt" style="--c:#C0492B">
+          <input type="checkbox" data-key="2026-08-02:PM" data-subj="THE2" data-kind="altpr">
+          <span class="slot__check" aria-hidden="true"></span>
+          <span class="slot__body">
+            <span class="slot__top"><span class="slot__when">Nachmittag</span><span class="slot__subj">Thermo II</span><span class="badge badge--vt">Vortag</span></span>
+            <span class="slot__task">Altprüfung 5</span>
+          </span>
+        </label></div>
+      </div></div>
+    </section>
+    <section class="week">
+      <h2 class="week__title"><span class="mono">KW 32</span><span class="week__range">3. August – 9. August</span></h2>
+      <div class="week__days">
+      <div class="day day--exam" data-date="2026-08-03">
+        <div class="day__date"><span class="day__num mono">3</span><span class="day__wd">Mo</span></div>
+        <div class="day__slots">
+        <div class="slot slot--soft">
+          <span class="slot__body"><span class="slot__top"><span class="slot__when">Vormittag</span></span>
+          <span class="slot__task slot__task--soft">Erholung &middot; optional letzte Wiederholung</span></span>
+        </div>
+        <div class="slot slot--exam" style="--c:#C0492B">
+          <span class="slot__body">
+            <span class="slot__top"><span class="slot__when">Nachmittag</span><span class="badge badge--exam">Prüfung</span></span>
+            <span class="slot__task">Thermodynamics II &middot; <span class="mono">12:00–14:00</span></span>
+          </span>
+        </div></div>
+      </div>
+      <div class="day day--vt" data-date="2026-08-04">
+        <div class="day__date"><span class="day__num mono">4</span><span class="day__wd">Di</span></div>
+        <div class="day__slots">
+        <label class="slot slot--study slot--vt" style="--c:#6D4AA8">
+          <input type="checkbox" data-key="2026-08-04:AM" data-subj="QM" data-kind="altpr">
+          <span class="slot__check" aria-hidden="true"></span>
+          <span class="slot__body">
+            <span class="slot__top"><span class="slot__when">Vormittag</span><span class="slot__subj">Quantum</span><span class="badge badge--vt">Vortag</span></span>
+            <span class="slot__task">Altprüfung 4</span>
+          </span>
+        </label>
+        <label class="slot slot--study slot--vt" style="--c:#6D4AA8">
+          <input type="checkbox" data-key="2026-08-04:PM" data-subj="QM" data-kind="altpr">
+          <span class="slot__check" aria-hidden="true"></span>
+          <span class="slot__body">
+            <span class="slot__top"><span class="slot__when">Nachmittag</span><span class="slot__subj">Quantum</span><span class="badge badge--vt">Vortag</span></span>
+            <span class="slot__task">Altprüfung 5</span>
+          </span>
+        </label></div>
+      </div>
+      <div class="day day--exam" data-date="2026-08-05">
+        <div class="day__date"><span class="day__num mono">5</span><span class="day__wd">Mi</span></div>
+        <div class="day__slots">
+        <div class="slot slot--exam" style="--c:#6D4AA8">
+          <span class="slot__body">
+            <span class="slot__top"><span class="slot__when">Vormittag</span><span class="badge badge--exam">Prüfung</span></span>
+            <span class="slot__task">Quantum Mechanics &middot; <span class="mono">08:30–10:30</span></span>
+          </span>
+        </div>
+        <div class="slot slot--soft">
+          <span class="slot__body"><span class="slot__top"><span class="slot__when">Nachmittag</span></span>
+          <span class="slot__task slot__task--soft">Erholung &middot; optional letzte Wiederholung</span></span>
+        </div></div>
+      </div>
+      <div class="day day--vt" data-date="2026-08-06">
+        <div class="day__date"><span class="day__num mono">6</span><span class="day__wd">Do</span></div>
+        <div class="day__slots">
+        <label class="slot slot--study slot--vt" style="--c:#2563B0">
+          <input type="checkbox" data-key="2026-08-06:AM" data-subj="STOCH" data-kind="altpr">
+          <span class="slot__check" aria-hidden="true"></span>
+          <span class="slot__body">
+            <span class="slot__top"><span class="slot__when">Vormittag</span><span class="slot__subj">Stochastics</span><span class="badge badge--vt">Vortag</span></span>
+            <span class="slot__task">Altprüfung 4</span>
+          </span>
+        </label>
+        <label class="slot slot--study slot--vt" style="--c:#2563B0">
+          <input type="checkbox" data-key="2026-08-06:PM" data-subj="STOCH" data-kind="altpr">
+          <span class="slot__check" aria-hidden="true"></span>
+          <span class="slot__body">
+            <span class="slot__top"><span class="slot__when">Nachmittag</span><span class="slot__subj">Stochastics</span><span class="badge badge--vt">Vortag</span></span>
+            <span class="slot__task">Altprüfung 5</span>
+          </span>
+        </label></div>
+      </div>
+      <div class="day day--exam" data-date="2026-08-07">
+        <div class="day__date"><span class="day__num mono">7</span><span class="day__wd">Fr</span></div>
+        <div class="day__slots">
+        <div class="slot slot--exam" style="--c:#2563B0">
+          <span class="slot__body">
+            <span class="slot__top"><span class="slot__when">Vormittag</span><span class="badge badge--exam">Prüfung</span></span>
+            <span class="slot__task">Stochastics & Machine Learning &middot; <span class="mono">09:30–11:30</span></span>
+          </span>
+        </div>
+        <div class="slot slot--soft">
+          <span class="slot__body"><span class="slot__top"><span class="slot__when">Nachmittag</span></span>
+          <span class="slot__task slot__task--soft">Erholung &middot; optional letzte Wiederholung</span></span>
+        </div></div>
+      </div>
+      <div class="day day--we" data-date="2026-08-08">
+        <div class="day__date"><span class="day__num mono">8</span><span class="day__wd">Sa</span></div>
+        <div class="day__slots"><div class="slot slot--soft slot--weekend">
+          <span class="slot__body"><span class="slot__task slot__task--soft">Wochenende &middot; frei / Puffer für Überhang</span></span>
+        </div></div>
+      </div>
+      <div class="day day--we" data-date="2026-08-09">
+        <div class="day__date"><span class="day__num mono">9</span><span class="day__wd">So</span></div>
+        <div class="day__slots">
+        <label class="slot slot--study slot--vt" style="--c:#8A6D3B">
+          <input type="checkbox" data-key="2026-08-09:AM" data-subj="WERK" data-kind="altpr">
+          <span class="slot__check" aria-hidden="true"></span>
+          <span class="slot__body">
+            <span class="slot__top"><span class="slot__when">Vormittag</span><span class="slot__subj">Werkstoffe</span><span class="badge badge--vt">Vortag</span></span>
+            <span class="slot__task">Altprüfung</span>
+          </span>
+        </label>
+        <label class="slot slot--study slot--vt" style="--c:#8A6D3B">
+          <input type="checkbox" data-key="2026-08-09:PM" data-subj="WERK" data-kind="altpr">
+          <span class="slot__check" aria-hidden="true"></span>
+          <span class="slot__body">
+            <span class="slot__top"><span class="slot__when">Nachmittag</span><span class="slot__subj">Werkstoffe</span><span class="badge badge--vt">Vortag</span></span>
+            <span class="slot__task">Midterm (halbe Abdeckung)</span>
+          </span>
+        </label></div>
+      </div></div>
+    </section>
+    <section class="week">
+      <h2 class="week__title"><span class="mono">KW 33</span><span class="week__range">10. August – 16. August</span></h2>
+      <div class="week__days">
+      <div class="day day--exam" data-date="2026-08-10">
+        <div class="day__date"><span class="day__num mono">10</span><span class="day__wd">Mo</span></div>
+        <div class="day__slots">
+        <div class="slot slot--exam" style="--c:#8A6D3B">
+          <span class="slot__body">
+            <span class="slot__top"><span class="slot__when">Vormittag</span><span class="badge badge--exam">Prüfung</span></span>
+            <span class="slot__task">Werkstoffe und Fertigung &middot; <span class="mono">09:30–11:15</span></span>
+          </span>
+        </div>
+        <div class="slot slot--soft">
+          <span class="slot__body"><span class="slot__top"><span class="slot__when">Nachmittag</span></span>
+          <span class="slot__task slot__task--soft">Erholung &middot; optional letzte Wiederholung</span></span>
+        </div></div>
+      </div>
+      <div class="day day--vt" data-date="2026-08-11">
+        <div class="day__date"><span class="day__num mono">11</span><span class="day__wd">Di</span></div>
+        <div class="day__slots">
+        <label class="slot slot--study slot--vt" style="--c:#1E8BA8">
+          <input type="checkbox" data-key="2026-08-11:AM" data-subj="FLF" data-kind="altpr">
+          <span class="slot__check" aria-hidden="true"></span>
+          <span class="slot__body">
+            <span class="slot__top"><span class="slot__when">Vormittag</span><span class="slot__subj">Fluid Fund.</span><span class="badge badge--vt">Vortag</span></span>
+            <span class="slot__task">Altprüfung 4</span>
+          </span>
+        </label>
+        <label class="slot slot--study slot--vt" style="--c:#1E8BA8">
+          <input type="checkbox" data-key="2026-08-11:PM" data-subj="FLF" data-kind="altpr">
+          <span class="slot__check" aria-hidden="true"></span>
+          <span class="slot__body">
+            <span class="slot__top"><span class="slot__when">Nachmittag</span><span class="slot__subj">Fluid Fund.</span><span class="badge badge--vt">Vortag</span></span>
+            <span class="slot__task">Altprüfung 5</span>
+          </span>
+        </label></div>
+      </div>
+      <div class="day day--exam" data-date="2026-08-12">
+        <div class="day__date"><span class="day__num mono">12</span><span class="day__wd">Mi</span></div>
+        <div class="day__slots">
+        <div class="slot slot--exam" style="--c:#1E8BA8">
+          <span class="slot__body">
+            <span class="slot__top"><span class="slot__when">Vormittag</span><span class="badge badge--exam">Prüfung</span></span>
+            <span class="slot__task">Fluid Dynamics: Fundamentals &middot; <span class="mono">08:30–10:00</span></span>
+          </span>
+        </div>
+        <div class="slot slot--soft">
+          <span class="slot__body"><span class="slot__top"><span class="slot__when">Nachmittag</span></span>
+          <span class="slot__task slot__task--soft">Erholung &middot; optional letzte Wiederholung</span></span>
+        </div></div>
+      </div>
+      <div class="day day--vt" data-date="2026-08-13">
+        <div class="day__date"><span class="day__num mono">13</span><span class="day__wd">Do</span></div>
+        <div class="day__slots">
+        <label class="slot slot--study slot--vt" style="--c:#D97A2B">
+          <input type="checkbox" data-key="2026-08-13:AM" data-subj="THE3" data-kind="altpr">
+          <span class="slot__check" aria-hidden="true"></span>
+          <span class="slot__body">
+            <span class="slot__top"><span class="slot__when">Vormittag</span><span class="slot__subj">Thermo III</span><span class="badge badge--vt">Vortag</span></span>
+            <span class="slot__task">Mock: C&C #2 + HE&R #2</span>
+          </span>
+        </label>
+        <label class="slot slot--study slot--vt" style="--c:#D97A2B">
+          <input type="checkbox" data-key="2026-08-13:PM" data-subj="THE3" data-kind="altpr">
+          <span class="slot__check" aria-hidden="true"></span>
+          <span class="slot__body">
+            <span class="slot__top"><span class="slot__when">Nachmittag</span><span class="slot__subj">Thermo III</span><span class="badge badge--vt">Vortag</span></span>
+            <span class="slot__task">Mock: C&C #3 + HE&R #3</span>
+          </span>
+        </label></div>
+      </div>
+      <div class="day day--exam" data-date="2026-08-14">
+        <div class="day__date"><span class="day__num mono">14</span><span class="day__wd">Fr</span></div>
+        <div class="day__slots">
+        <div class="slot slot--soft">
+          <span class="slot__body"><span class="slot__top"><span class="slot__when">Vormittag</span></span>
+          <span class="slot__task slot__task--soft">Erholung &middot; optional letzte Wiederholung</span></span>
+        </div>
+        <div class="slot slot--exam" style="--c:#D97A2B">
+          <span class="slot__body">
+            <span class="slot__top"><span class="slot__when">Nachmittag</span><span class="badge badge--exam">Prüfung</span></span>
+            <span class="slot__task">Thermodynamics III &middot; <span class="mono">13:00–15:00</span></span>
+          </span>
+        </div></div>
+      </div>
+      <div class="day day--we" data-date="2026-08-15">
+        <div class="day__date"><span class="day__num mono">15</span><span class="day__wd">Sa</span></div>
+        <div class="day__slots"><div class="slot slot--soft slot--weekend">
+          <span class="slot__body"><span class="slot__task slot__task--soft">Wochenende &middot; frei / Puffer für Überhang</span></span>
+        </div></div>
+      </div>
+      <div class="day day--we" data-date="2026-08-16">
+        <div class="day__date"><span class="day__num mono">16</span><span class="day__wd">So</span></div>
+        <div class="day__slots">
+        <label class="slot slot--study slot--vt" style="--c:#3E8E5A">
+          <input type="checkbox" data-key="2026-08-16:AM" data-subj="CTRL" data-kind="altpr">
+          <span class="slot__check" aria-hidden="true"></span>
+          <span class="slot__body">
+            <span class="slot__top"><span class="slot__when">Vormittag</span><span class="slot__subj">Control II</span><span class="badge badge--vt">Vortag</span></span>
+            <span class="slot__task">Altprüfung 4</span>
+          </span>
+        </label>
+        <label class="slot slot--study slot--vt" style="--c:#3E8E5A">
+          <input type="checkbox" data-key="2026-08-16:PM" data-subj="CTRL" data-kind="altpr">
+          <span class="slot__check" aria-hidden="true"></span>
+          <span class="slot__body">
+            <span class="slot__top"><span class="slot__when">Nachmittag</span><span class="slot__subj">Control II</span><span class="badge badge--vt">Vortag</span></span>
+            <span class="slot__task">Altprüfung 5</span>
+          </span>
+        </label></div>
+      </div></div>
+    </section>
+    <section class="week">
+      <h2 class="week__title"><span class="mono">KW 34</span><span class="week__range">17. August – 19. August</span></h2>
+      <div class="week__days">
+      <div class="day day--exam" data-date="2026-08-17">
+        <div class="day__date"><span class="day__num mono">17</span><span class="day__wd">Mo</span></div>
+        <div class="day__slots">
+        <div class="slot slot--soft">
+          <span class="slot__body"><span class="slot__top"><span class="slot__when">Vormittag</span></span>
+          <span class="slot__task slot__task--soft">Erholung &middot; optional letzte Wiederholung</span></span>
+        </div>
+        <div class="slot slot--exam" style="--c:#3E8E5A">
+          <span class="slot__body">
+            <span class="slot__top"><span class="slot__when">Nachmittag</span><span class="badge badge--exam">Prüfung</span></span>
+            <span class="slot__task">Control Systems II &middot; <span class="mono">15:30–18:00</span></span>
+          </span>
+        </div></div>
+      </div>
+      <div class="day day--vt" data-date="2026-08-18">
+        <div class="day__date"><span class="day__num mono">18</span><span class="day__wd">Di</span></div>
+        <div class="day__slots">
+        <label class="slot slot--study slot--vt" style="--c:#138086">
+          <input type="checkbox" data-key="2026-08-18:AM" data-subj="FLA" data-kind="altpr">
+          <span class="slot__check" aria-hidden="true"></span>
+          <span class="slot__body">
+            <span class="slot__top"><span class="slot__when">Vormittag</span><span class="slot__subj">Fluid Adv.</span><span class="badge badge--vt">Vortag</span></span>
+            <span class="slot__task">Altprüfung 3</span>
+          </span>
+        </label>
+        <label class="slot slot--study slot--vt" style="--c:#138086">
+          <input type="checkbox" data-key="2026-08-18:PM" data-subj="FLA" data-kind="altpr">
+          <span class="slot__check" aria-hidden="true"></span>
+          <span class="slot__body">
+            <span class="slot__top"><span class="slot__when">Nachmittag</span><span class="slot__subj">Fluid Adv.</span><span class="badge badge--vt">Vortag</span></span>
+            <span class="slot__task">Altprüfung 4</span>
+          </span>
+        </label></div>
+      </div>
+      <div class="day day--exam" data-date="2026-08-19">
+        <div class="day__date"><span class="day__num mono">19</span><span class="day__wd">Mi</span></div>
+        <div class="day__slots">
+        <div class="slot slot--soft">
+          <span class="slot__body"><span class="slot__top"><span class="slot__when">Vormittag</span></span>
+          <span class="slot__task slot__task--soft">Erholung &middot; optional letzte Wiederholung</span></span>
+        </div>
+        <div class="slot slot--exam" style="--c:#138086">
+          <span class="slot__body">
+            <span class="slot__top"><span class="slot__when">Nachmittag</span><span class="badge badge--exam">Prüfung</span></span>
+            <span class="slot__task">Fluid Dynamics: Advanced &middot; <span class="mono">16:00–18:00</span></span>
+          </span>
+        </div></div>
+      </div></div>
+    </section>
+
+  <footer>
+    <p><b>Annahmen</b> (sag Bescheid, wenn etwas nicht stimmt): Start Mi 10.06.; Konzert 17.06. (nachmittags frei),
+    18.06. ganzer Tag frei (Erholung), DVK 22.–24.06. blockiert; Fluid Dynamics Fundamentals = Prüfung 12.08.,
+    Advanced = 19.08.; Midterms in Quantum & Fluid je 2 pro Halbtag.</p>
+    <p><b>Realität:</b> Es gibt rund 83 verfügbare Lern-Halbtage, aber alle Serien + alle Altprüfungen wären ~152.
+    Der Plan erledigt <b>alle 47 Serien-Halbtage</b> und packt <b>36 Altprüfungen</b> rein – gleichmäßig
+    verteilt, damit du in jedem Fach vorbereitet bist. Mehr Altprüfungen gehen nur mit geöffneten Samstagen
+    oder weniger Serien.</p>
+  </footer>
+</main>
+
+<script>
+const DATA = {"subjects": {"THE2": {"name": "Thermodynamics II", "exam": "2026-08-03", "time": "12:00–14:00", "n_series": 8, "n_exams_total": 17, "done_series": 8, "done_exams": 5, "code": "THE2"}, "QM": {"name": "Quantum Mechanics", "exam": "2026-08-05", "time": "08:30–10:30", "n_series": 6, "n_exams_total": 21, "done_series": 6, "done_exams": 5, "code": "QM"}, "STOCH": {"name": "Stochastics & Machine Learning", "exam": "2026-08-07", "time": "09:30–11:30", "n_series": 7, "n_exams_total": 5, "done_series": 7, "done_exams": 5, "code": "STOCH"}, "WERK": {"name": "Werkstoffe und Fertigung", "exam": "2026-08-10", "time": "09:30–11:15", "n_series": 6, "n_exams_total": 3, "done_series": 6, "done_exams": 3, "code": "WERK"}, "FLF": {"name": "Fluid Dynamics: Fundamentals", "exam": "2026-08-12", "time": "08:30–10:00", "n_series": 3, "n_exams_total": 18, "done_series": 3, "done_exams": 5, "code": "FLF"}, "THE3": {"name": "Thermodynamics III", "exam": "2026-08-14", "time": "13:00–15:00", "n_series": 7, "n_exams_total": 17, "done_series": 7, "done_exams": 4, "code": "THE3"}, "CTRL": {"name": "Control Systems II", "exam": "2026-08-17", "time": "15:30–18:00", "n_series": 7, "n_exams_total": 9, "done_series": 7, "done_exams": 5, "code": "CTRL"}, "FLA": {"name": "Fluid Dynamics: Advanced", "exam": "2026-08-19", "time": "16:00–18:00", "n_series": 3, "n_exams_total": 15, "done_series": 3, "done_exams": 4, "code": "FLA"}}, "colors": {"THE2": "#C0492B", "QM": "#6D4AA8", "STOCH": "#2563B0", "WERK": "#8A6D3B", "FLF": "#1E8BA8", "THE3": "#D97A2B", "CTRL": "#3E8E5A", "FLA": "#138086"}, "short": {"THE2": "Thermo II", "QM": "Quantum", "STOCH": "Stochastics", "WERK": "Werkstoffe", "FLF": "Fluid Fund.", "THE3": "Thermo III", "CTRL": "Control II", "FLA": "Fluid Adv."}, "order": ["THE2", "QM", "STOCH", "WERK", "FLF", "THE3", "CTRL", "FLA"]};
+const KEY = "lernplan2026";
+
+function store(){ try{ return JSON.parse(localStorage.getItem(KEY)||"{}"); }catch(e){ return {}; } }
+function save(o){ try{ localStorage.setItem(KEY, JSON.stringify(o)); }catch(e){} }
+let state = store();
+
+const boxes = [...document.querySelectorAll('.slot input[type=checkbox]')];
+boxes.forEach(b=>{
+  if(state[b.dataset.key]) b.checked = true;
+  b.addEventListener('change', ()=>{
+    if(b.checked) state[b.dataset.key]=1; else delete state[b.dataset.key];
+    save(state); recompute();
+  });
+});
+
+function recompute(){
+  // overall
+  const total = boxes.length, done = boxes.filter(b=>b.checked).length;
+  const pct = total? Math.round(done/total*100):0;
+  document.getElementById('overall').style.width = pct+'%';
+  document.getElementById('pct').textContent = pct+'%';
+  // per subject
+  for(const c of DATA.order){
+    const ser = boxes.filter(b=>b.dataset.subj===c && b.dataset.kind==='serie');
+    const alt = boxes.filter(b=>b.dataset.subj===c && (b.dataset.kind==='altpr'||b.dataset.kind==='review'));
+    const sd = ser.filter(b=>b.checked).length, ad = alt.filter(b=>b.checked).length;
+    const sp = ser.length? sd/ser.length*100:0, ap = alt.length? ad/alt.length*100:0;
+    const q=(s)=>document.querySelector(s);
+    q(`[data-ser="${c}"]`).textContent = `${sd}/${ser.length}`;
+    q(`[data-alt="${c}"]`).textContent = `${ad}/${alt.length}`;
+    q(`[data-serbar="${c}"]`).style.width = sp+'%';
+    q(`[data-altbar="${c}"]`).style.width = ap+'%';
+    const total_av = DATA.subjects[c].n_exams_total;
+    q(`[data-count="${c}"]`).textContent = `${alt.length} von ${total_av} Altpr. geplant`;
+  }
+}
+
+// countdown + today
+function ymd(d){ return d.toISOString().slice(0,10); }
+function updateTime(){
+  const today = new Date(); today.setHours(0,0,0,0);
+  // next exam
+  let next=null;
+  for(const c of DATA.order){
+    const e = new Date(DATA.subjects[c].exam+'T00:00:00');
+    if(e>=today){ next={c,e}; break; }
+  }
+  if(next){
+    const days = Math.round((next.e-today)/86400000);
+    document.getElementById('nextdays').textContent = days;
+    document.getElementById('nextname').textContent = DATA.subjects[next.c].name;
+  } else {
+    document.getElementById('nextbox').innerHTML = '<b>✓</b><span class="nm">Alle Prüfungen geschafft</span>';
+  }
+  // today highlight
+  document.querySelectorAll('.day').forEach(d=>d.classList.remove('today'));
+  const t = document.querySelector(`.day[data-date="${ymd(today)}"]`);
+  if(t) t.classList.add('today');
+}
+document.getElementById('jump').addEventListener('click',()=>{
+  const today=new Date(); today.setHours(0,0,0,0);
+  let el=document.querySelector(`.day[data-date="${ymd(today)}"]`);
+  if(!el){ // nearest upcoming
+    const all=[...document.querySelectorAll('.day')];
+    el=all.find(d=>d.dataset.date>=ymd(today))||all[all.length-1];
+  }
+  if(el) el.scrollIntoView({behavior:'smooth',block:'center'});
+});
+document.getElementById('reset').addEventListener('click',()=>{
+  if(confirm('Allen Fortschritt zurücksetzen?')){
+    state={}; save(state); boxes.forEach(b=>b.checked=false); recompute();
+  }
+});
+
+recompute(); updateTime();
+</script>
+</body>
+</html>
